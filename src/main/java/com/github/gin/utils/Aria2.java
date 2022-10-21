@@ -75,19 +75,75 @@ public class Aria2 {
         return call(method.getName(), params);
     }
 
+    /**
+     * 原生请求方法
+     * @param method 方法名
+     * @param params 参数
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < T>>
+     * @since 2022/10/21 14:33
+     */
     public <T> Aria2Request<Aria2Response<T>> call(String method, List<Object> params) {
         if (token != null && !"".equals(token)) {
             params.add(0, "token:" + token);
         }
-        JsonUtils.printJson(params);
-        return new Aria2Request<>(this.client, this.host, new Aria2Param(String.valueOf(this.id++), method, params));
+        final Aria2Param param = new Aria2Param(String.valueOf(this.id++), method, params);
+        JsonUtils.printJson(param);
+        return new Aria2Request<>(this.client, this.host, param);
     }
 
+    /**
+     * 移除正在下载的任务
+     * @param gid gid
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.lang.String>>
+     * @since 2022/10/21 14:18
+     */
+    public Aria2Request<Aria2Response<String>> remove(String gid) {
+        return call(Aria2Methods.remove, gid);
+    }
+
+    /**
+     * 查询任务状态
+     * @param gid gid
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < com.github.gin.utils.response.Task>>
+     * @since 2022/10/21 14:33
+     */
+    public Aria2Request<Aria2Response<Task>> tellStatus(String gid) {
+        return tellStatus(gid, Task.keys().toArray(new String[0]));
+    }
+
+    /**
+     * 查询任务状态
+     * @param gid  gid
+     * @param keys keys
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < com.github.gin.utils.response.Task>>
+     * @since 2022/10/21 14:32
+     */
+    public Aria2Request<Aria2Response<Task>> tellStatus(String gid, String... keys) {
+        return call(Aria2Methods.tellStatus, Arrays.asList(gid, Arrays.asList(keys)));
+    }
+
+    /**
+     * 查询已停止任务
+     * @param page 页码
+     * @param size 记录数
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @since 2022/10/21 14:10
+     */
     public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size) {
         return tellStop(page, size, Task.keys().toArray(new String[0]));
     }
 
+    /**
+     * 查询已停止任务
+     * @param page 页码
+     * @param size 记录数
+     * @param keys https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @since 2022/10/21 14:10
+     */
     public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size, String... keys) {
         return call(Aria2Methods.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
+
+
 }
