@@ -6,7 +6,7 @@ package com.github.gin.utils.request;
  * @version : v1.0.0
  * @since : 2022/10/21 10:51
  */
-public enum Aria2Methods {
+public enum Aria2Method {
     /**
      * 添加下载任务
      */
@@ -30,7 +30,7 @@ public enum Aria2Methods {
         return name;
     }
 
-    Aria2Methods(String name) {
+    Aria2Method(String name) {
         this.name =  name;
     }
 }

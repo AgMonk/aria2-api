@@ -3,13 +3,14 @@ package com.github.gin.utils;
 import com.github.gin.utils.params.Aria2Option;
 import com.github.gin.utils.params.Aria2Param;
 import com.github.gin.utils.params.methods.AddUriParam;
-import com.github.gin.utils.request.Aria2Methods;
+import com.github.gin.utils.params.methods.MulticallParam;
+import com.github.gin.utils.request.Aria2Method;
 import com.github.gin.utils.request.Aria2Request;
 import com.github.gin.utils.request.LoggingInterceptor;
 import com.github.gin.utils.response.Aria2Response;
-import com.github.gin.utils.response.result.Aria2Version;
 import com.github.gin.utils.response.result.Aria2GlobalStatus;
 import com.github.gin.utils.response.result.Aria2Task;
+import com.github.gin.utils.response.result.Aria2Version;
 import okhttp3.OkHttpClient;
 import org.gin.JsonUtils;
 
@@ -63,18 +64,18 @@ public class Aria2 {
     }
 
     public Aria2Request<Aria2Response<String>> addUri(Collection<String> urls, AddUriParam params) {
-        return call(Aria2Methods.addUri, urls, params);
+        return call(Aria2Method.addUri, urls, params);
     }
 
     public <T> Aria2Request<Aria2Response<T>> call(String method, Object... params) {
         return call(method, Arrays.asList(params));
     }
 
-    public <T> Aria2Request<Aria2Response<T>> call(Aria2Methods method, List<Object> params) {
+    public <T> Aria2Request<Aria2Response<T>> call(Aria2Method method, List<Object> params) {
         return call(method.getName(), params);
     }
 
-    public <T> Aria2Request<Aria2Response<T>> call(Aria2Methods method, Object... params) {
+    public <T> Aria2Request<Aria2Response<T>> call(Aria2Method method, Object... params) {
         return call(method.getName(), params);
     }
 
@@ -95,14 +96,23 @@ public class Aria2 {
     }
 
     public Aria2Request<Aria2Response<Aria2GlobalStatus>> getGlobalStat() {
-        return call(Aria2Methods.getGlobalStat);
-    }
-public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
-        return call(Aria2Methods.getVersion);
+        return call(Aria2Method.getGlobalStat);
     }
 
     public Aria2Request<Aria2Response<Aria2Option>> getOption(String gid) {
-        return call(Aria2Methods.getOption, gid);
+        return call(Aria2Method.getOption, gid);
+    }
+
+    public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
+        return call(Aria2Method.getVersion);
+    }
+
+    public Aria2Request<Aria2Response<List<List<String>>>> multicall(Collection<MulticallParam> multicallParams) {
+        return call(Aria2Method.multicall, multicallParams);
+    }
+
+    public Aria2Request<Aria2Response<List<List<String>>>> multicall(MulticallParam... multicallParams) {
+        return multicall(Arrays.asList(multicallParams));
     }
 
     /**
@@ -112,11 +122,11 @@ public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
      * @since 2022/10/21 14:18
      */
     public Aria2Request<Aria2Response<String>> remove(String gid) {
-        return call(Aria2Methods.remove, gid);
+        return call(Aria2Method.remove, gid);
     }
 
     public Aria2Request<Aria2Response<String>> removeDownloadResult(String gid) {
-        return call(Aria2Methods.removeDownloadResult, gid);
+        return call(Aria2Method.removeDownloadResult, gid);
     }
 
     /**
@@ -126,7 +136,7 @@ public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
      * @since 2022/10/21 14:57
      */
     public Aria2Request<Aria2Response<List<Aria2Task>>> tellActive(String... keys) {
-        return call(Aria2Methods.tellActive, Arrays.asList(keys));
+        return call(Aria2Method.tellActive, Arrays.asList(keys));
     }
 
     /**
@@ -137,7 +147,7 @@ public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
      * @since 2022/10/21 14:32
      */
     public Aria2Request<Aria2Response<Aria2Task>> tellStatus(String gid, String... keys) {
-        return call(Aria2Methods.tellStatus, Arrays.asList(gid, Arrays.asList(keys)));
+        return call(Aria2Method.tellStatus, Arrays.asList(gid, Arrays.asList(keys)));
     }
 
     /**
@@ -149,7 +159,7 @@ public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
      * @since 2022/10/21 14:10
      */
     public Aria2Request<Aria2Response<List<Aria2Task>>> tellStop(int page, int size, String... keys) {
-        return call(Aria2Methods.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        return call(Aria2Method.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
 
     /**
@@ -161,7 +171,7 @@ public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
      * @since 2022/10/21 15:01
      */
     public Aria2Request<Aria2Response<List<Aria2Task>>> tellWaiting(int page, int size, String... keys) {
-        return call(Aria2Methods.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        return call(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
 
 
