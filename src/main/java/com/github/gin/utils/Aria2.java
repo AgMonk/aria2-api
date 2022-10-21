@@ -7,7 +7,6 @@ import com.github.gin.utils.request.Aria2Request;
 import com.github.gin.utils.request.LoggingInterceptor;
 import com.github.gin.utils.response.Aria2Response;
 import com.github.gin.utils.response.Task;
-import com.github.gin.utils.response.TaskFile;
 import okhttp3.OkHttpClient;
 import org.gin.JsonUtils;
 
@@ -93,16 +92,6 @@ public class Aria2 {
     }
 
     /**
-     * 查询任务的uri
-     * @param gid gid
-     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.TaskFile.Uri>>>
-     * @since 2022/10/21 14:41
-     */
-    public Aria2Request<Aria2Response<List<TaskFile.Uri>>> getUris(String gid) {
-        return call(Aria2Methods.getUris, gid);
-    }
-
-    /**
      * 移除正在下载的任务
      * @param gid gid
      * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.lang.String>>
@@ -133,6 +122,16 @@ public class Aria2 {
      */
     public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size, String... keys) {
         return call(Aria2Methods.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+    }
+    /**
+     * 查询活动任务
+     * @param keys keys
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @author bx002
+     * @since 2022/10/21 14:57
+     */
+ public Aria2Request<Aria2Response<List<Task>>> tellActive(String... keys) {
+        return call(Aria2Methods.tellActive,  Arrays.asList(keys));
     }
 
 

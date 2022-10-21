@@ -13,8 +13,6 @@ public enum Aria2Methods {
     addUri("aria2.addUri"),
     remove("aria2.remove"),
     tellStatus("aria2.tellStatus"),
-    getUris("aria2.getUris"),
-    getFiles("aria2.getFiles"),
     tellActive("aria2.tellActive"),
     tellWaiting("aria2.tellWaiting"),
     tellStopped("aria2.tellStopped"),
