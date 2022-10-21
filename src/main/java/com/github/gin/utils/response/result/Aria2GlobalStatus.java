@@ -1,4 +1,4 @@
-package com.github.gin.utils.response;
+package com.github.gin.utils.response.result;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  * @since : 2022/10/21 15:20
  */
 @Data
-public class GlobalStatus {
+public class Aria2GlobalStatus {
     Integer numActive;
     Integer numWaiting;
     Long downloadSpeed;

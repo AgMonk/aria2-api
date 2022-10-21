@@ -1,4 +1,4 @@
-package com.github.gin.utils.response;
+package com.github.gin.utils.response.result;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -14,7 +14,7 @@ import java.util.Set;
  * @since : 2022/10/21 12:36
  */
 @Data
-public class Task {
+public class Aria2Task {
     String gid;
     String status;
     Long totalLength;
@@ -25,7 +25,7 @@ public class Task {
     Integer connections;
     String bitfield;
     String dir;
-    List<TaskFile> files;
+    List<Aria2TaskFile> files;
     Long downloadSpeed;
     Long uploadSpeed;
 
@@ -46,8 +46,8 @@ public class Task {
 
 
     public static Set<String> keys() {
-        final Task task = new Task();
-        final String s = JSONObject.toJSONString(task, SerializerFeature.WriteMapNullValue);
+        final Aria2Task aria2Task = new Aria2Task();
+        final String s = JSONObject.toJSONString(aria2Task, SerializerFeature.WriteMapNullValue);
         final JSONObject json = JSONObject.parseObject(s);
         return json.keySet();
     }

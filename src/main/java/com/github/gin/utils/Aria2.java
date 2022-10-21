@@ -7,8 +7,9 @@ import com.github.gin.utils.request.Aria2Methods;
 import com.github.gin.utils.request.Aria2Request;
 import com.github.gin.utils.request.LoggingInterceptor;
 import com.github.gin.utils.response.Aria2Response;
-import com.github.gin.utils.response.GlobalStatus;
-import com.github.gin.utils.response.Task;
+import com.github.gin.utils.response.result.Aria2Version;
+import com.github.gin.utils.response.result.Aria2GlobalStatus;
+import com.github.gin.utils.response.result.Aria2Task;
 import okhttp3.OkHttpClient;
 import org.gin.JsonUtils;
 
@@ -93,8 +94,11 @@ public class Aria2 {
         return new Aria2Request<>(this.client, this.host, param);
     }
 
-    public Aria2Request<Aria2Response<GlobalStatus>> getGlobalStat() {
+    public Aria2Request<Aria2Response<Aria2GlobalStatus>> getGlobalStat() {
         return call(Aria2Methods.getGlobalStat);
+    }
+public Aria2Request<Aria2Response<Aria2Version>> getVersion() {
+        return call(Aria2Methods.getVersion);
     }
 
     public Aria2Request<Aria2Response<Aria2Option>> getOption(String gid) {
@@ -118,10 +122,10 @@ public class Aria2 {
     /**
      * 查询活动任务
      * @param keys keys
-     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.result.Task>>>
      * @since 2022/10/21 14:57
      */
-    public Aria2Request<Aria2Response<List<Task>>> tellActive(String... keys) {
+    public Aria2Request<Aria2Response<List<Aria2Task>>> tellActive(String... keys) {
         return call(Aria2Methods.tellActive, Arrays.asList(keys));
     }
 
@@ -129,10 +133,10 @@ public class Aria2 {
      * 查询任务状态
      * @param gid  gid
      * @param keys keys
-     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < com.github.gin.utils.response.Task>>
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < com.github.gin.utils.response.result.Task>>
      * @since 2022/10/21 14:32
      */
-    public Aria2Request<Aria2Response<Task>> tellStatus(String gid, String... keys) {
+    public Aria2Request<Aria2Response<Aria2Task>> tellStatus(String gid, String... keys) {
         return call(Aria2Methods.tellStatus, Arrays.asList(gid, Arrays.asList(keys)));
     }
 
@@ -141,10 +145,10 @@ public class Aria2 {
      * @param page 页码
      * @param size 记录数
      * @param keys https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus
-     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.result.Task>>>
      * @since 2022/10/21 14:10
      */
-    public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size, String... keys) {
+    public Aria2Request<Aria2Response<List<Aria2Task>>> tellStop(int page, int size, String... keys) {
         return call(Aria2Methods.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
 
@@ -153,10 +157,10 @@ public class Aria2 {
      * @param page 页码
      * @param size 记录数
      * @param keys https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus
-     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.result.Task>>>
      * @since 2022/10/21 15:01
      */
-    public Aria2Request<Aria2Response<List<Task>>> tellWaiting(int page, int size, String... keys) {
+    public Aria2Request<Aria2Response<List<Aria2Task>>> tellWaiting(int page, int size, String... keys) {
         return call(Aria2Methods.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
 

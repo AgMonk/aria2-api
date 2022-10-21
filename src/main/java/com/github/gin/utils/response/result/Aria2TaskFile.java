@@ -1,4 +1,4 @@
-package com.github.gin.utils.response;
+package com.github.gin.utils.response.result;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @since : 2022/10/21 14:40
  */
 @Data
-public class TaskFile {
+public class Aria2TaskFile {
     String path;
     Long completedLength;
     Long length;
