@@ -12,7 +12,6 @@ import com.github.gin.utils.response.result.Aria2GlobalStatus;
 import com.github.gin.utils.response.result.Aria2Task;
 import com.github.gin.utils.response.result.Aria2Version;
 import okhttp3.OkHttpClient;
-import org.gin.JsonUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -91,7 +90,7 @@ public class Aria2 {
             params.add(0, "token:" + token);
         }
         final Aria2Param param = new Aria2Param(String.valueOf(this.id++), method, params);
-        JsonUtils.printJson(param);
+//        JsonUtils.printJson(param);
         return new Aria2Request<>(this.client, this.host, param);
     }
 
