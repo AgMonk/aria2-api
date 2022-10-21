@@ -51,20 +51,4 @@ public class Task {
         final JSONObject json = JSONObject.parseObject(s);
         return json.keySet();
     }
-
-    @Data
-    static class TaskFile {
-        String path;
-        Long completedLength;
-        Long length;
-        Integer index;
-        Boolean selected;
-        List<Uri> uris;
-
-        @Data
-        static class Uri {
-            String uri;
-            String status;
-        }
-    }
 }
