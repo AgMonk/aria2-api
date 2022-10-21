@@ -106,6 +106,9 @@ public class Aria2 {
     public Aria2Request<Aria2Response<Aria2Option>> getOption(String gid) {
         return call(Aria2Methods.getOption, gid);
     }
+public Aria2Request<Aria2Response<String>> removeDownloadResult(String gid) {
+        return call(Aria2Methods.removeDownloadResult, gid);
+    }
 
 public Aria2Request<Aria2Response<GlobalStatus>> getGlobalStat() {
         return call(Aria2Methods.getGlobalStat);
