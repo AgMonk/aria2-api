@@ -26,12 +26,12 @@ public class Task {
     String bitfield;
     String dir;
     List<TaskFile> files;
+    Long downloadSpeed;
+    Long uploadSpeed;
 
 
     //以下为未确定数据类型的字段
 
-    String downloadSpeed;
-    String uploadSpeed;
     String infoHash;
     String numSeeders;
     String seeder;
