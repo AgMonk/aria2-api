@@ -1,5 +1,6 @@
 package com.github.gin.utils;
 
+import com.github.gin.utils.params.Aria2Option;
 import com.github.gin.utils.params.Aria2Param;
 import com.github.gin.utils.params.methods.AddUriParam;
 import com.github.gin.utils.request.Aria2Methods;
@@ -101,6 +102,22 @@ public class Aria2 {
         return call(Aria2Methods.remove, gid);
     }
 
+    public Aria2Request<Aria2Response<Aria2Option>> getOption(String gid) {
+        return call(Aria2Methods.getOption, gid);
+    }
+
+
+
+    /**
+     * 查询活动任务
+     * @param keys keys
+     * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
+     * @since 2022/10/21 14:57
+     */
+    public Aria2Request<Aria2Response<List<Task>>> tellActive(String... keys) {
+        return call(Aria2Methods.tellActive, Arrays.asList(keys));
+    }
+
     /**
      * 查询任务状态
      * @param gid  gid
@@ -123,15 +140,17 @@ public class Aria2 {
     public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size, String... keys) {
         return call(Aria2Methods.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
+
     /**
-     * 查询活动任务
-     * @param keys keys
+     * 查询等待的任务
+     * @param page 页码
+     * @param size 记录数
+     * @param keys https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus
      * @return com.github.gin.utils.request.Aria2Request<com.github.gin.utils.response.Aria2Response < java.util.List < com.github.gin.utils.response.Task>>>
-     * @author bx002
-     * @since 2022/10/21 14:57
+     * @since 2022/10/21 15:01
      */
- public Aria2Request<Aria2Response<List<Task>>> tellActive(String... keys) {
-        return call(Aria2Methods.tellActive,  Arrays.asList(keys));
+    public Aria2Request<Aria2Response<List<Task>>> tellWaiting(int page, int size, String... keys) {
+        return call(Aria2Methods.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
 
 
