@@ -110,10 +110,6 @@ public class Aria2 {
         return call(Aria2Method.multicall, multicallParams);
     }
 
-    public Aria2Request<Aria2Response<List<List<String>>>> multicall(MulticallParam... multicallParams) {
-        return multicall(Arrays.asList(multicallParams));
-    }
-
     /**
      * 移除正在下载的任务
      * @param gid gid
