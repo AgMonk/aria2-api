@@ -24,7 +24,6 @@ public interface Convertor<R> {
      */
     static <T> Aria2Response<T> common(ResponseBody responseBody, Class<T> clazz) throws IOException {
         String string = responseBody.string();
-        System.out.println("string = " + string);
         final Aria2Response<String> response = JSONObject.parseObject(string, new TypeReference<Aria2Response<String>>() {
         });
         if (clazz == String.class) {

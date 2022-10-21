@@ -6,7 +6,9 @@ import com.github.gin.utils.request.Aria2Methods;
 import com.github.gin.utils.request.Aria2Request;
 import com.github.gin.utils.request.LoggingInterceptor;
 import com.github.gin.utils.response.Aria2Response;
+import com.github.gin.utils.response.Task;
 import okhttp3.OkHttpClient;
+import org.gin.JsonUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -77,6 +79,15 @@ public class Aria2 {
         if (token != null && !"".equals(token)) {
             params.add(0, "token:" + token);
         }
+        JsonUtils.printJson(params);
         return new Aria2Request<>(this.client, this.host, new Aria2Param(String.valueOf(this.id++), method, params));
+    }
+
+    public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size) {
+        return tellStop(page, size, Task.keys().toArray(new String[0]));
+    }
+
+    public Aria2Request<Aria2Response<List<Task>>> tellStop(int page, int size, String... keys) {
+        return call(Aria2Methods.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
     }
 }

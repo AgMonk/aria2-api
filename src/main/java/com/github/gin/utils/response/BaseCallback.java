@@ -31,7 +31,7 @@ public interface BaseCallback<R> extends Callback, Convertor<R> {
             case 2:
                 return response.body();
             case 4:
-                throw new Aria2RequestException(code,"客户端异常", call);
+                throw new Aria2RequestException(code,response.message(), call);
             case 5:
                 throw new Aria2RequestException(code, "服务器异常",call);
             default:
