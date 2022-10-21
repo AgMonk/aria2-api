@@ -24,19 +24,19 @@
             <version>4.10.0</version>
         </dependency>
 
-        <!--suppress VulnerableLibrariesLocal -->
-        <dependency>
-            <groupId>org.gin</groupId>
-            <artifactId>common-utils</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <!--suppress MavenPackageUpdate -->
+            <version>1.2.79</version>
+        </dependency>
 
     </dependencies>
 
