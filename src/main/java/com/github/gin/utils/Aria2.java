@@ -93,6 +93,14 @@ public class Aria2 {
         return new Aria2Request<>(this.client, this.host, param);
     }
 
+    public Aria2Request<Aria2Response<GlobalStatus>> getGlobalStat() {
+        return call(Aria2Methods.getGlobalStat);
+    }
+
+    public Aria2Request<Aria2Response<Aria2Option>> getOption(String gid) {
+        return call(Aria2Methods.getOption, gid);
+    }
+
     /**
      * 移除正在下载的任务
      * @param gid gid
@@ -103,18 +111,9 @@ public class Aria2 {
         return call(Aria2Methods.remove, gid);
     }
 
-    public Aria2Request<Aria2Response<Aria2Option>> getOption(String gid) {
-        return call(Aria2Methods.getOption, gid);
-    }
-public Aria2Request<Aria2Response<String>> removeDownloadResult(String gid) {
+    public Aria2Request<Aria2Response<String>> removeDownloadResult(String gid) {
         return call(Aria2Methods.removeDownloadResult, gid);
     }
-
-public Aria2Request<Aria2Response<GlobalStatus>> getGlobalStat() {
-        return call(Aria2Methods.getGlobalStat);
-    }
-
-
 
     /**
      * 查询活动任务
