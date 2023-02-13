@@ -47,10 +47,12 @@ public class Aria2 {
     public Aria2(String host, OkHttpClient client) {
         this(host, client, null);
     }
-
+    public Aria2(String host,  String token) {
+        this(host, null, token);
+    }
     public Aria2(String host, OkHttpClient client, String token) {
-        this.host = host;
-        this.client = client;
+        this.host = isEmpty(host) ? DEFAULT_HOST : host;
+        this.client = client == null ? buildClient() : client;
         this.token = token;
     }
 
@@ -60,6 +62,10 @@ public class Aria2 {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(new LoggingInterceptor())
                 .build();
+    }
+
+    private static boolean isEmpty(Object o) {
+        return o == null || "".equals(o);
     }
 
     public Aria2Request<Aria2Response<String>> addUri(Collection<String> urls, AddUriParam params) {
