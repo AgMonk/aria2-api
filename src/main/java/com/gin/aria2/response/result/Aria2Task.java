@@ -1,5 +1,8 @@
 package com.gin.aria2.response.result;
 
+import com.gin.aria2.enums.TaskStatus;
+import com.gin.aria2.response.Aria2ListResponse;
+import com.gin.aria2.response.field.Aria2TaskFile;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +18,7 @@ import java.util.List;
 @Setter
 public class Aria2Task {
     String gid;
-    String status;
+    TaskStatus status;
     Long totalLength;
     Long completedLength;
     Long uploadLength;
@@ -27,6 +30,8 @@ public class Aria2Task {
     List<Aria2TaskFile> files;
     Long downloadSpeed;
     Long uploadSpeed;
+    Integer errorCode;
+    String errorMessage;
 
 
     //以下为未确定数据类型的字段
@@ -34,8 +39,6 @@ public class Aria2Task {
     String infoHash;
     String numSeeders;
     String seeder;
-    String errorCode;
-    String errorMessage;
     String followedBy;
     String following;
     String belongsTo;
@@ -43,5 +46,6 @@ public class Aria2Task {
     String verifiedLength;
     String verifyIntegrityPending;
 
-
+    public static class Response extends Aria2ListResponse<Aria2Task>{
+    }
 }

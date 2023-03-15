@@ -1,6 +1,8 @@
-package com.gin.aria2.response.result;
+package com.gin.aria2.response.field;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -9,7 +11,8 @@ import java.util.List;
  * @version : v1.0.0
  * @since : 2022/10/21 14:40
  */
-@Data
+@Getter
+@Setter
 public class Aria2TaskFile {
     String path;
     Long completedLength;
