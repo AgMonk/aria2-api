@@ -27,6 +27,4 @@ public class AddUriParam {
     /**
      * 断点续传
      */
-    @JSONField(name = "continue")
-    boolean continuation;
 }
