@@ -3,10 +3,12 @@ package com.gin.aria2.main;
 import com.gin.aria2.call.Aria2MethodCall;
 import com.gin.aria2.dto.Aria2Param;
 import com.gin.aria2.enums.Aria2Method;
+import com.gin.aria2.params.methods.AddUriParam;
 import com.gin.aria2.response.Aria2StringResponse;
 import com.gin.aria2.response.result.Aria2Task;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -87,5 +89,16 @@ public class Aria2Api {
         return client.call(param, Aria2Task.ListResponse.class);
     }
 
+    /**
+     * 添加单个任务
+     * @param urls   下载地址
+     * @param params 参数
+     */
+    public Aria2MethodCall<String> addUri(Collection<String> urls, AddUriParam params){
+        final Aria2Param param = new Aria2Param(Aria2Method.addUri, urls, params);
+        return client.call(param, Aria2StringResponse.class);
+    }
+    //todo 批量添加下载任务
+    //todo 批量移除下载完成的任务
 
 }   
