@@ -1,4 +1,4 @@
-package com.github.gin.utils.response;
+package com.gin.aria2.response;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;

@@ -1,7 +1,7 @@
-package com.github.gin.utils.response;
+package com.gin.aria2.response;
 
-import com.github.gin.utils.exception.Aria2Exception;
-import com.github.gin.utils.exception.Aria2RequestException;
+import com.gin.aria2.exception.Aria2Exception;
+import com.gin.aria2.exception.Aria2RequestException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;

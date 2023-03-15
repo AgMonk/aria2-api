@@ -1,4 +1,4 @@
-package com.github.gin.utils;
+package com.gin.aria2;
 
 /**
  * ${TODO}

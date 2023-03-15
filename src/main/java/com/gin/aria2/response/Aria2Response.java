@@ -1,4 +1,4 @@
-package com.github.gin.utils.response;
+package com.gin.aria2.response;
 
 import lombok.Getter;
 import lombok.Setter;

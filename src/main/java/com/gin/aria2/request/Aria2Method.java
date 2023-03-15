@@ -1,4 +1,4 @@
-package com.github.gin.utils.request;
+package com.gin.aria2.request;
 
 /**
  * 请求方法

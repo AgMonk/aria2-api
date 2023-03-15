@@ -1,10 +1,10 @@
-package com.github.gin.utils.request;
+package com.gin.aria2.request;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.gin.utils.exception.Aria2RequestException;
-import com.github.gin.utils.params.Aria2Param;
-import com.github.gin.utils.response.BaseCallback;
-import com.github.gin.utils.response.Convertor;
+import com.gin.aria2.exception.Aria2RequestException;
+import com.gin.aria2.params.Aria2Param;
+import com.gin.aria2.response.BaseCallback;
+import com.gin.aria2.response.Convertor;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 

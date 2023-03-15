@@ -1,18 +1,15 @@
-package com.github.gin.utils.exception;
+package com.gin.aria2.exception;
 
-import lombok.Getter;
-import lombok.Setter;
+import okhttp3.Call;
 
 /**
- * Pixiv异常
+ * Pixiv请求异常
  * @author : ginstone
  * @version : v1.0.0
- * @since : 2022/10/14 10:58
- **/
-@Getter
-@Setter
-public class Aria2Exception extends Exception {
-    int code;
+ * @since : 2022/10/15 11:28
+ */
+public class Aria2RequestException extends Aria2Exception {
+    Call call;
 
     /**
      * Constructs a new exception with the specified detail message.  The
@@ -21,9 +18,8 @@ public class Aria2Exception extends Exception {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public Aria2Exception(int code, String message) {
-        super(message);
-        this.code = code;
+    public Aria2RequestException(int code, String message, Call call) {
+        super(code, message);
+        this.call = call;
     }
-
 }

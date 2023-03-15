@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.gin.utils</groupId>
-    <artifactId>aria2-api</artifactId>
+    <artifactId>aria2Api-api</artifactId>
     <version>1.0.0</version>
 
     <properties>

@@ -1,4 +1,4 @@
-package com.github.gin.utils.params.methods;
+package com.gin.aria2.params.methods;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;

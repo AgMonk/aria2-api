@@ -1,4 +1,4 @@
-package com.github.gin.utils.request;
+package com.gin.aria2.request;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;

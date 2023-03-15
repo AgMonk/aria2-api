@@ -1,4 +1,4 @@
-package com.github.gin.utils.params;
+package com.gin.aria2.params;
 
 import lombok.Getter;
 

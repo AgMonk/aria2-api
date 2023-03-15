@@ -1,4 +1,4 @@
-package com.github.gin.utils.response.result;
+package com.gin.aria2.response.result;
 
 import lombok.Data;
 

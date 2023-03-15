@@ -1,6 +1,6 @@
-# aria2-api
+# aria2Api-api
 
-aria2-api
+aria2Api-api
 
 # 引入
 
@@ -9,16 +9,16 @@ aria2-api
 <project>
     <repositories>
         <repository>
-            <id>com.github.gin.utils</id>
-            <name>aria2-api</name>
-            <url>https://agmonk.github.io/aria2-api/maven-repo/</url>
+            <id>com.gin.aria2com.gin.aria2Api</id>
+            <name>aria2Api-api</name>
+            <url>https://agmonk.github.io/aria2Api-api/maven-repo/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>com.github.gin.utils</groupId>
-            <artifactId>aria2-api</artifactId>
+            <groupId>com.gin.aria2com.gin.aria2Api</groupId>
+            <artifactId>aria2Api-api</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
