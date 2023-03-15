@@ -14,8 +14,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddUriParam {
+    /**
+     * 保存目录
+     */
     String dir;
+    /**
+     * 文件名
+     */
     @JSONField(name = "out")
     String filename;
     String referer;
+    /**
+     * 断点续传
+     */
+    @JSONField(name = "continue")
+    boolean continuation;
 }
