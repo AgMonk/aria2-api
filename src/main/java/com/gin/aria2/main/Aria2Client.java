@@ -5,7 +5,6 @@ import com.gin.aria2.call.Aria2MethodCall;
 import com.gin.aria2.dto.Aria2Param;
 import com.gin.aria2.dto.form.Aria2RequestBody;
 import com.gin.aria2.enums.Aria2Method;
-import com.gin.aria2.request.LoggingInterceptor;
 import com.gin.aria2.response.Aria2Response;
 import com.gin.aria2.utils.JsonUtils;
 import com.gin.aria2.utils.ObjUtils;
@@ -30,7 +29,7 @@ public class Aria2Client {
 
     public Aria2Client(OkHttpClient client, String host, String token) {
         this.host = ObjUtils.isEmpty(host) ? DEFAULT_HOST : host;
-        this.client = client != null ? client : new OkHttpClient().newBuilder().addInterceptor(new LoggingInterceptor()).build();
+        this.client = client != null ? client : new OkHttpClient();
         this.token = token;
     }
 
@@ -41,9 +40,11 @@ public class Aria2Client {
     public Aria2Call call(Aria2Param param) {
         return new Aria2Call(pCall(param));
     }
-    public <T> Aria2MethodCall<T> call(Aria2Param param, Class<?extends Aria2Response<T>> responseClass) {
+
+    public <T> Aria2MethodCall<T> call(Aria2Param param, Class<? extends Aria2Response<T>> responseClass) {
         return new Aria2MethodCall<>(pCall(param), responseClass);
     }
+
     /**
      * 一次发送多个请求
      * @param params 参数
@@ -53,7 +54,7 @@ public class Aria2Client {
         return call(new Aria2Param(Aria2Method.multicall, new ArrayList<>(params)));
     }
 
-    public <T> Aria2MethodCall<T> call(List<Aria2Param> params, Class<?extends Aria2Response<T>> responseClass) {
+    public <T> Aria2MethodCall<T> call(List<Aria2Param> params, Class<? extends Aria2Response<T>> responseClass) {
         final Aria2Param param = new Aria2Param(Aria2Method.multicall, new ArrayList<>(params));
         return call(param, responseClass);
     }

@@ -2,6 +2,7 @@ package com.gin.aria2.callback;
 
 import com.gin.aria2.response.Aria2Response;
 import com.gin.aria2.utils.JsonUtils;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,12 +12,9 @@ import org.jetbrains.annotations.Nullable;
  * @version : v1.0.0
  * @since : 2023/3/15 14:56
  */
+@Setter
 public abstract class ClassAria2Callback<T> extends AbstractAria2Callback {
-    final Class<Aria2Response<T>> eClass;
-
-    public ClassAria2Callback(Class<Aria2Response<T>> eClass) {
-        this.eClass = eClass;
-    }
+    Class<? extends Aria2Response<T>> eClass;
 
     @Override
     public final void onSuccess(@NotNull String body) {

@@ -3,6 +3,7 @@ package com.gin.aria2.dto;
 import com.gin.aria2.enums.Aria2Method;
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,4 +21,9 @@ public class Aria2Param {
         this.methodName = methodName;
         this.params = params;
     }
+    public Aria2Param(Aria2Method methodName, Object... params) {
+        this.methodName = methodName;
+        this.params = Arrays.asList(params);
+    }
+
 }

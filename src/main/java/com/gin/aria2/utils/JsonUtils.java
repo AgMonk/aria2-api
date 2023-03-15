@@ -1,5 +1,6 @@
 package com.gin.aria2.utils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -24,6 +25,7 @@ public class JsonUtils {
     public final static ObjectMapper MAPPER = new ObjectMapper();
 
     static {
+        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //美化输出
         MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
         //反序列化时 空串识别为 null

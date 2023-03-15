@@ -24,7 +24,7 @@ public class Aria2Call {
      * 异步请求
      * @param callback 回调方法
      */
-    public void async(AbstractAria2Callback callback) {
+    public void asyncString(AbstractAria2Callback callback) {
         this.call.enqueue(callback);
     }
 
