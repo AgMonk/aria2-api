@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/main/java/com/gin/aria2Api/test/
+Test.java

@@ -1,6 +1,6 @@
 package com.gin.aria2.params.methods;
 
-import com.gin.aria2.request.Aria2Method;
+import com.gin.aria2.enums.Aria2Method;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

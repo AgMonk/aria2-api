@@ -1,4 +1,6 @@
-package com.gin.aria2.request;
+package com.gin.aria2.enums;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * 请求方法
@@ -22,15 +24,15 @@ public enum Aria2Method {
     getVersion("aria2.getVersion"),
     multicall("system.multicall"),
     ;
-
+    @JsonValue
     final String name;
 
 
-    public String getName() {
-        return name;
+    Aria2Method(String name) {
+        this.name = name;
     }
 
-    Aria2Method(String name) {
-        this.name =  name;
+    public String getName() {
+        return name;
     }
 }

@@ -1,4 +1,4 @@
-package com.gin.aria2.params;
+package com.gin.aria2.dto.form;
 
 import lombok.Getter;
 
@@ -11,13 +11,13 @@ import java.util.List;
  * @since : 2022/10/21 11:19
  */
 @Getter
-public class Aria2Param {
+public class Aria2RequestBody {
     final String id;
     final String jsonrpc = "2.0";
     final String method;
-    final List<?> params;
+    final List<Object> params;
 
-    public Aria2Param(String id, String method, List<?> params) {
+    public Aria2RequestBody(String id, String method, List<Object> params) {
         this.id = id;
         this.method = method;
         this.params = params;

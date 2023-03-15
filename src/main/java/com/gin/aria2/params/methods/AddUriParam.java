@@ -1,6 +1,6 @@
 package com.gin.aria2.params.methods;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,10 +21,7 @@ public class AddUriParam {
     /**
      * 文件名
      */
-    @JSONField(name = "out")
+    @JsonProperty("out")
     String filename;
     String referer;
-    /**
-     * 断点续传
-     */
 }

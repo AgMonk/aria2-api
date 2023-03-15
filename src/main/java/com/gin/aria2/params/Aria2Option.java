@@ -1,166 +1,168 @@
 package com.gin.aria2.params;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- *
+ * @author bx002
  */
-@Data
+@Getter
+@Setter
 public class Aria2Option {
-    @JSONField(alternateNames = "allow-overwrite", name = "allow-overwrite")
+    @JsonProperty("allow-overwrite")
     String allowOverwrite;
-    @JSONField(alternateNames = "allow-piece-length-change", name = "allow-piece-length-change")
+    @JsonProperty("allow-piece-length-change")
     String allowPieceLengthChange;
-    @JSONField(alternateNames = "always-resume", name = "always-resume")
+    @JsonProperty("always-resume")
     String alwaysResume;
-    @JSONField(alternateNames = "async-dns", name = "async-dns")
+    @JsonProperty("async-dns")
     String asyncDns;
-    @JSONField(alternateNames = "auto-file-renaming", name = "auto-file-renaming")
+    @JsonProperty("auto-file-renaming")
     String autoFileRenaming;
-    @JSONField(alternateNames = "bt-enable-hook-after-hash-check", name = "bt-enable-hook-after-hash-check")
+    @JsonProperty("bt-enable-hook-after-hash-check")
     String btEnableHookAfterHashCheck;
-    @JSONField(alternateNames = "bt-enable-lpd", name = "bt-enable-lpd")
+    @JsonProperty("bt-enable-lpd")
     String btEnableLpd;
-    @JSONField(alternateNames = "bt-force-encryption", name = "bt-force-encryption")
+    @JsonProperty("bt-force-encryption")
     String btForceEncryption;
-    @JSONField(alternateNames = "bt-hash-check-seed", name = "bt-hash-check-seed")
+    @JsonProperty("bt-hash-check-seed")
     String btHashCheckSeed;
-    @JSONField(alternateNames = "bt-load-saved-metadata", name = "bt-load-saved-metadata")
+    @JsonProperty("bt-load-saved-metadata")
     String btLoadSavedMetadata;
-    @JSONField(alternateNames = "bt-max-peers", name = "bt-max-peers")
+    @JsonProperty("bt-max-peers")
     String btMaxPeers;
-    @JSONField(alternateNames = "bt-metadata-only", name = "bt-metadata-only")
+    @JsonProperty("bt-metadata-only")
     String btMetadataOnly;
-    @JSONField(alternateNames = "bt-min-crypto-level", name = "bt-min-crypto-level")
+    @JsonProperty("bt-min-crypto-level")
     String btMinCryptoLevel;
-    @JSONField(alternateNames = "bt-remove-unselected-file", name = "bt-remove-unselected-file")
+    @JsonProperty("bt-remove-unselected-file")
     String btRemoveUnselectedFile;
-    @JSONField(alternateNames = "bt-request-peer-speed-limit", name = "bt-request-peer-speed-limit")
+    @JsonProperty("bt-request-peer-speed-limit")
     String btRequestPeerSpeedLimit;
-    @JSONField(alternateNames = "bt-require-crypto", name = "bt-require-crypto")
+    @JsonProperty("bt-require-crypto")
     String btRequireCrypto;
-    @JSONField(alternateNames = "bt-save-metadata", name = "bt-save-metadata")
+    @JsonProperty("bt-save-metadata")
     String btSaveMetadata;
-    @JSONField(alternateNames = "bt-seed-unverified", name = "bt-seed-unverified")
+    @JsonProperty("bt-seed-unverified")
     String btSeedUnverified;
-    @JSONField(alternateNames = "bt-stop-timeout", name = "bt-stop-timeout")
+    @JsonProperty("bt-stop-timeout")
     String btStopTimeout;
-    @JSONField(alternateNames = "bt-tracker-connect-timeout", name = "bt-tracker-connect-timeout")
+    @JsonProperty("bt-tracker-connect-timeout")
     String btTrackerConnectTimeout;
-    @JSONField(alternateNames = "bt-tracker-interval", name = "bt-tracker-interval")
+    @JsonProperty("bt-tracker-interval")
     String btTrackerInterval;
-    @JSONField(alternateNames = "bt-tracker-timeout", name = "bt-tracker-timeout")
+    @JsonProperty("bt-tracker-timeout")
     String btTrackerTimeout;
-    @JSONField(alternateNames = "check-integrity", name = "check-integrity")
+    @JsonProperty("check-integrity")
     String checkIntegrity;
-    @JSONField(alternateNames = "conditional-get", name = "conditional-get")
+    @JsonProperty("conditional-get")
     String conditionalGet;
-    @JSONField(alternateNames = "connect-timeout", name = "connect-timeout")
+    @JsonProperty("connect-timeout")
     String connectTimeout;
-    @JSONField(alternateNames = "content-disposition-default-utf8", name = "content-disposition-default-utf8")
+    @JsonProperty("content-disposition-default-utf8")
     String contentDispositionDefaultUtf8;
-    @JSONField(alternateNames = "continue", name = "continue")
+    @JsonProperty("continue")
     String continues;
-    @JSONField(alternateNames = "dir", name = "dir")
+    @JsonProperty("dir")
     String dir;
-    @JSONField(alternateNames = "dry-run", name = "dry-run")
+    @JsonProperty("dry-run")
     String dryRun;
-    @JSONField(alternateNames = "enable-http-keep-alive", name = "enable-http-keep-alive")
+    @JsonProperty("enable-http-keep-alive")
     String enableHttpKeepAlive;
-    @JSONField(alternateNames = "enable-http-pipelining", name = "enable-http-pipelining")
+    @JsonProperty("enable-http-pipelining")
     String enableHttpPipelining;
-    @JSONField(alternateNames = "enable-mmap", name = "enable-mmap")
+    @JsonProperty("enable-mmap")
     String enableMmap;
-    @JSONField(alternateNames = "enable-peer-exchange", name = "enable-peer-exchange")
+    @JsonProperty("enable-peer-exchange")
     String enablePeerExchange;
-    @JSONField(alternateNames = "file-allocation", name = "file-allocation")
+    @JsonProperty("file-allocation")
     String fileAllocation;
-    @JSONField(alternateNames = "follow-metalink", name = "follow-metalink")
+    @JsonProperty("follow-metalink")
     String followMetalink;
-    @JSONField(alternateNames = "follow-torrent", name = "follow-torrent")
+    @JsonProperty("follow-torrent")
     String followTorrent;
-    @JSONField(alternateNames = "force-save", name = "force-save")
+    @JsonProperty("force-save")
     String forceSave;
-    @JSONField(alternateNames = "ftp-pasv", name = "ftp-pasv")
+    @JsonProperty("ftp-pasv")
     String ftpPasv;
-    @JSONField(alternateNames = "ftp-reuse-connection", name = "ftp-reuse-connection")
+    @JsonProperty("ftp-reuse-connection")
     String ftpReuseConnection;
-    @JSONField(alternateNames = "ftp-type", name = "ftp-type")
+    @JsonProperty("ftp-type")
     String ftpType;
-    @JSONField(alternateNames = "hash-check-only", name = "hash-check-only")
+    @JsonProperty("hash-check-only")
     String hashCheckOnly;
-    @JSONField(alternateNames = "http-accept-gzip", name = "http-accept-gzip")
+    @JsonProperty("http-accept-gzip")
     String httpAcceptGzip;
-    @JSONField(alternateNames = "http-auth-challenge", name = "http-auth-challenge")
+    @JsonProperty("http-auth-challenge")
     String httpAuthChallenge;
-    @JSONField(alternateNames = "http-no-cache", name = "http-no-cache")
+    @JsonProperty("http-no-cache")
     String httpNoCache;
-    @JSONField(alternateNames = "lowest-speed-limit", name = "lowest-speed-limit")
+    @JsonProperty("lowest-speed-limit")
     String lowestSpeedLimit;
-    @JSONField(alternateNames = "max-connection-per-server", name = "max-connection-per-server")
+    @JsonProperty("max-connection-per-server")
     String maxConnectionPerServer;
-    @JSONField(alternateNames = "max-download-limit", name = "max-download-limit")
+    @JsonProperty("max-download-limit")
     String maxDownloadLimit;
-    @JSONField(alternateNames = "max-file-not-found", name = "max-file-not-found")
+    @JsonProperty("max-file-not-found")
     String maxFileNotFound;
-    @JSONField(alternateNames = "max-mmap-limit", name = "max-mmap-limit")
+    @JsonProperty("max-mmap-limit")
     String maxMmapLimit;
-    @JSONField(alternateNames = "max-resume-failure-tries", name = "max-resume-failure-tries")
+    @JsonProperty("max-resume-failure-tries")
     String maxResumeFailureTries;
-    @JSONField(alternateNames = "max-tries", name = "max-tries")
+    @JsonProperty("max-tries")
     String maxTries;
-    @JSONField(alternateNames = "max-upload-limit", name = "max-upload-limit")
+    @JsonProperty("max-upload-limit")
     String maxUploadLimit;
-    @JSONField(alternateNames = "metalink-enable-unique-protocol", name = "metalink-enable-unique-protocol")
+    @JsonProperty("metalink-enable-unique-protocol")
     String metalinkEnableUniqueProtocol;
-    @JSONField(alternateNames = "metalink-preferred-protocol", name = "metalink-preferred-protocol")
+    @JsonProperty("metalink-preferred-protocol")
     String metalinkPreferredProtocol;
-    @JSONField(alternateNames = "min-split-size", name = "min-split-size")
+    @JsonProperty("min-split-size")
     String minSplitSize;
-    @JSONField(alternateNames = "no-file-allocation-limit", name = "no-file-allocation-limit")
+    @JsonProperty("no-file-allocation-limit")
     String noFileAllocationLimit;
-    @JSONField(alternateNames = "no-netrc", name = "no-netrc")
+    @JsonProperty("no-netrc")
     String noNetrc;
-    @JSONField(alternateNames = "parameterized-uri", name = "parameterized-uri")
+    @JsonProperty("parameterized-uri")
     String parameterizedUri;
-    @JSONField(alternateNames = "pause-metadata", name = "pause-metadata")
+    @JsonProperty("pause-metadata")
     String pauseMetadata;
-    @JSONField(alternateNames = "piece-length", name = "piece-length")
+    @JsonProperty("piece-length")
     String pieceLength;
-    @JSONField(alternateNames = "proxy-method", name = "proxy-method")
+    @JsonProperty("proxy-method")
     String proxyMethod;
-    @JSONField(alternateNames = "realtime-chunk-checksum", name = "realtime-chunk-checksum")
+    @JsonProperty("realtime-chunk-checksum")
     String realtimeChunkChecksum;
-    @JSONField(alternateNames = "referer", name = "referer")
+    @JsonProperty("referer")
     String referer;
-    @JSONField(alternateNames = "remote-time", name = "remote-time")
+    @JsonProperty("remote-time")
     String remoteTime;
-    @JSONField(alternateNames = "remove-control-file", name = "remove-control-file")
+    @JsonProperty("remove-control-file")
     String removeControlFile;
-    @JSONField(alternateNames = "retry-wait", name = "retry-wait")
+    @JsonProperty("retry-wait")
     String retryWait;
-    @JSONField(alternateNames = "reuse-uri", name = "reuse-uri")
+    @JsonProperty("reuse-uri")
     String reuseUri;
-    @JSONField(alternateNames = "rpc-save-upload-metadata", name = "rpc-save-upload-metadata")
+    @JsonProperty("rpc-save-upload-metadata")
     String rpcSaveUploadMetadata;
-    @JSONField(alternateNames = "save-not-found", name = "save-not-found")
+    @JsonProperty("save-not-found")
     String saveNotFound;
-    @JSONField(alternateNames = "seed-ratio", name = "seed-ratio")
+    @JsonProperty("seed-ratio")
     String seedRatio;
-    @JSONField(alternateNames = "seed-time", name = "seed-time")
+    @JsonProperty("seed-time")
     String seedTime;
-    @JSONField(alternateNames = "split", name = "split")
+    @JsonProperty("split")
     String split;
-    @JSONField(alternateNames = "stream-piece-selector", name = "stream-piece-selector")
+    @JsonProperty("stream-piece-selector")
     String streamPieceSelector;
-    @JSONField(alternateNames = "timeout", name = "timeout")
+    @JsonProperty("timeout")
     String timeout;
-    @JSONField(alternateNames = "uri-selector", name = "uri-selector")
+    @JsonProperty("uri-selector")
     String uriSelector;
-    @JSONField(alternateNames = "use-head", name = "use-head")
+    @JsonProperty("use-head")
     String useHead;
-    @JSONField(alternateNames = "user-agent", name = "user-agent")
+    @JsonProperty("user-agent")
     String userAgent;
 
 

@@ -1,7 +1,6 @@
 package com.gin.aria2.response;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 请求参数
@@ -10,7 +9,6 @@ import lombok.Setter;
  * @since : 2022/10/21 11:19
  */
 @Getter
-@Setter
 public class Aria2Response<T> {
     final String id;
     final String jsonrpc;

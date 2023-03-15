@@ -1,11 +1,9 @@
 package com.gin.aria2.response.result;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * 下载任务
@@ -13,7 +11,8 @@ import java.util.Set;
  * @version : v1.0.0
  * @since : 2022/10/21 12:36
  */
-@Data
+@Getter
+@Setter
 public class Aria2Task {
     String gid;
     String status;
@@ -45,10 +44,4 @@ public class Aria2Task {
     String verifyIntegrityPending;
 
 
-    public static Set<String> keys() {
-        final Aria2Task aria2Task = new Aria2Task();
-        final String s = JSONObject.toJSONString(aria2Task, SerializerFeature.WriteMapNullValue);
-        final JSONObject json = JSONObject.parseObject(s);
-        return json.keySet();
-    }
 }
