@@ -55,9 +55,9 @@ public class Aria2Api {
      * @param params 下载参数
      * @return gid
      */
-    public Aria2MethodCall<List<List<String>>> addUris(Collection<String> urls, Aria2Option params) {
-        return addUris(urls.stream()
-                               .map(url -> new Aria2AddUriForm(Collections.singleton(url), params.clone()))
+    public Aria2MethodCall<List<List<String>>> addUris(Aria2AddUriForm form) {
+        return addUris(form.getUrls().stream()
+                               .map(url -> new Aria2AddUriForm(Collections.singleton(url), form.getParams().clone()))
                                .collect(Collectors.toList())
         );
     }

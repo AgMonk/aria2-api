@@ -4,6 +4,7 @@ import com.gin.aria2.dto.base.Aria2Option;
 import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.enums.Aria2Method;
 import com.gin.aria2.response.Aria2Response;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
@@ -16,6 +17,7 @@ import java.util.List;
  * @since : 2023/3/16 11:20
  */
 @RequiredArgsConstructor
+@Getter
 public class Aria2AddUriForm {
     final Collection<String> urls;
     final Aria2Option params;
