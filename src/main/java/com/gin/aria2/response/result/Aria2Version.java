@@ -1,6 +1,8 @@
 package com.gin.aria2.response.result;
 
-import lombok.Data;
+import com.gin.aria2.response.Aria2Response;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -9,8 +11,12 @@ import java.util.List;
  * @version : v1.0.0
  * @since : 2022/10/21 15:39
  */
-@Data
+@Getter
+@Setter
 public class Aria2Version {
     List<String > enabledFeatures;
     String version;
+
+    public static class Response extends Aria2Response<Aria2Version> {
+    }
 }

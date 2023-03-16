@@ -8,13 +8,14 @@ import com.gin.aria2.params.methods.AddUriParam;
 import com.gin.aria2.response.Aria2StringResponse;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2Task;
+import com.gin.aria2.response.result.Aria2Version;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * api
+ * api <a href="https://aria2.github.io/manual/en/html/aria2c.html">API文档</a>
  * @author : ginstone
  * @version : v1.0.0
  * @since : 2023/3/15 15:57
@@ -57,6 +58,15 @@ public class Aria2Api {
     }
 
     /**
+     * 获取版本信息
+     * @return 版本信息
+     */
+    public Aria2MethodCall<Aria2Version> getVersion() {
+        final Aria2Param param = new Aria2Param(Aria2Method.getVersion);
+        return client.call(param, Aria2Version.Response.class);
+    }
+
+    /**
      * 移除下载完成的任务
      * @param gid gid
      * @return gid
@@ -78,7 +88,7 @@ public class Aria2Api {
 
     /**
      * 查询活动任务
-     * @param keys 字段
+     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2Task>> tellActive(String... keys) {
@@ -89,7 +99,7 @@ public class Aria2Api {
     /**
      * 查询单个任务状态
      * @param gid  gid
-     * @param keys 字段
+     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<Aria2Task> tellStatus(String gid, String... keys) {
@@ -101,7 +111,7 @@ public class Aria2Api {
      * 查询停止任务
      * @param page 页数
      * @param size 每页条数
-     * @param keys 字段
+     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2Task>> tellStop(int page, int size, String... keys) {
@@ -113,7 +123,7 @@ public class Aria2Api {
      * 查询等待任务
      * @param page 页数
      * @param size 每页条数
-     * @param keys 字段
+     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2Task>> tellWaiting(int page, int size, String... keys) {
