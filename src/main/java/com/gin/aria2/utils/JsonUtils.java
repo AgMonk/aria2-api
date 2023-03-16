@@ -64,6 +64,7 @@ public class JsonUtils {
         try {
             return MAPPER.readValue(s, clazz);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             return null;
         }
     }

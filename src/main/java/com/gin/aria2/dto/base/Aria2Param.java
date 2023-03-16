@@ -1,4 +1,4 @@
-package com.gin.aria2.dto;
+package com.gin.aria2.dto.base;
 
 import com.gin.aria2.enums.Aria2Method;
 import lombok.Getter;

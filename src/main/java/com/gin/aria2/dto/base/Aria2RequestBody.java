@@ -1,4 +1,4 @@
-package com.gin.aria2.dto.form;
+package com.gin.aria2.dto.base;
 
 import lombok.Getter;
 

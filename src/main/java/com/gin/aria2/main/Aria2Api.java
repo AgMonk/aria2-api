@@ -1,14 +1,14 @@
 package com.gin.aria2.main;
 
 import com.gin.aria2.call.Aria2MethodCall;
-import com.gin.aria2.dto.Aria2Param;
+import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.enums.Aria2Method;
-import com.gin.aria2.params.Aria2Option;
-import com.gin.aria2.params.methods.AddUriParam;
+import com.gin.aria2.dto.base.Aria2Option;
 import com.gin.aria2.response.Aria2StringResponse;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2Task;
 import com.gin.aria2.response.result.Aria2Version;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +20,7 @@ import java.util.List;
  * @version : v1.0.0
  * @since : 2023/3/15 15:57
  */
+@Getter
 public class Aria2Api {
     final Aria2Client client;
 
@@ -32,7 +33,7 @@ public class Aria2Api {
      * @param urls   下载地址
      * @param params 参数
      */
-    public Aria2MethodCall<String> addUri(Collection<String> urls, AddUriParam params) {
+    public Aria2MethodCall<String> addUri(Collection<String> urls, Aria2Option params) {
         final Aria2Param param = new Aria2Param(Aria2Method.addUri, urls, params);
         return client.call(param, Aria2StringResponse.class);
     }

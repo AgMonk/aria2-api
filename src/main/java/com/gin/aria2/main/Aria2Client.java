@@ -2,8 +2,8 @@ package com.gin.aria2.main;
 
 import com.gin.aria2.call.Aria2Call;
 import com.gin.aria2.call.Aria2MethodCall;
-import com.gin.aria2.dto.Aria2Param;
-import com.gin.aria2.dto.form.Aria2RequestBody;
+import com.gin.aria2.dto.base.Aria2Param;
+import com.gin.aria2.dto.base.Aria2RequestBody;
 import com.gin.aria2.enums.Aria2Method;
 import com.gin.aria2.response.Aria2Response;
 import com.gin.aria2.utils.JsonUtils;
