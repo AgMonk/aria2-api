@@ -7,7 +7,7 @@ import com.gin.aria2.dto.form.Aria2AddUriForm;
 import com.gin.aria2.enums.Aria2Method;
 import com.gin.aria2.response.Aria2StringResponse;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
-import com.gin.aria2.response.result.Aria2Task;
+import com.gin.aria2.response.result.Aria2TaskStatus;
 import com.gin.aria2.response.result.Aria2Version;
 import lombok.Getter;
 
@@ -92,7 +92,7 @@ public class Aria2Api {
     }
 
     /**
-     * 移除下载完成的任务
+     * 移除下载中的任务
      * @param gid gid
      * @return gid
      */
@@ -116,9 +116,9 @@ public class Aria2Api {
      * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
-    public Aria2MethodCall<List<Aria2Task>> tellActive(String... keys) {
+    public Aria2MethodCall<List<Aria2TaskStatus>> tellActive(String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        return client.call(param, Aria2Task.ListResponse.class);
+        return client.call(param, Aria2TaskStatus.ListResponse.class);
     }
 
     /**
@@ -127,9 +127,9 @@ public class Aria2Api {
      * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
-    public Aria2MethodCall<Aria2Task> tellStatus(String gid, String... keys) {
+    public Aria2MethodCall<Aria2TaskStatus> tellStatus(String gid, String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellStatus, Arrays.asList(gid, Arrays.asList(keys)));
-        return client.call(param, Aria2Task.Response.class);
+        return client.call(param, Aria2TaskStatus.Response.class);
     }
 
     /**
@@ -139,9 +139,9 @@ public class Aria2Api {
      * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
-    public Aria2MethodCall<List<Aria2Task>> tellStop(int page, int size, String... keys) {
+    public Aria2MethodCall<List<Aria2TaskStatus>> tellStop(int page, int size, String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
-        return client.call(param, Aria2Task.ListResponse.class);
+        return client.call(param, Aria2TaskStatus.ListResponse.class);
     }
 
     /**
@@ -151,11 +151,10 @@ public class Aria2Api {
      * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
-    public Aria2MethodCall<List<Aria2Task>> tellWaiting(int page, int size, String... keys) {
+    public Aria2MethodCall<List<Aria2TaskStatus>> tellWaiting(int page, int size, String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
-        return client.call(param, Aria2Task.ListResponse.class);
+        return client.call(param, Aria2TaskStatus.ListResponse.class);
     }
-    //todo 批量添加下载任务
     //todo 批量移除下载完成的任务
 
 }   

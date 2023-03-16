@@ -10,14 +10,14 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * 下载任务
+ * 任务状态
  * @author : ginstone
  * @version : v1.0.0
  * @since : 2022/10/21 12:36
  */
 @Getter
 @Setter
-public class Aria2Task {
+public class Aria2TaskStatus {
     String gid;
     TaskStatus status;
     Long totalLength;
@@ -47,9 +47,9 @@ public class Aria2Task {
     String verifiedLength;
     String verifyIntegrityPending;
 
-    public static class ListResponse extends Aria2ListResponse<Aria2Task> {
+    public static class ListResponse extends Aria2ListResponse<Aria2TaskStatus> {
     }
 
-    public static class Response extends Aria2Response<Aria2Task> {
+    public static class Response extends Aria2Response<Aria2TaskStatus> {
     }
 }
