@@ -1,6 +1,6 @@
 package com.gin.aria2.response.result;
 
-import com.gin.aria2.response.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2Response;
 import lombok.Getter;
 import lombok.Setter;
 

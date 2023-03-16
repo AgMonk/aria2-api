@@ -1,4 +1,4 @@
-package com.gin.aria2.response;
+package com.gin.aria2.response.clazz;
 
 import lombok.Getter;
 

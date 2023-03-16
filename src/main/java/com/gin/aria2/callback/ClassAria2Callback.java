@@ -1,6 +1,6 @@
 package com.gin.aria2.callback;
 
-import com.gin.aria2.response.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2Response;
 import com.gin.aria2.utils.JsonUtils;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;

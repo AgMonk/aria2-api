@@ -5,8 +5,8 @@ import com.gin.aria2.dto.base.Aria2Option;
 import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.dto.form.Aria2AddUriForm;
 import com.gin.aria2.enums.Aria2Method;
-import com.gin.aria2.response.Aria2ListListStringResponse;
-import com.gin.aria2.response.Aria2StringResponse;
+import com.gin.aria2.response.clazz.Aria2ResponseMultiString;
+import com.gin.aria2.response.clazz.Aria2ResponseString;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2TaskStatus;
 import com.gin.aria2.response.result.Aria2Version;
@@ -37,7 +37,7 @@ public class Aria2Api {
      * @param form  表单
      */
     public Aria2MethodCall<String> addUri(Aria2AddUriForm form) {
-        return client.call(form.buildParam(), Aria2StringResponse.class);
+        return client.call(form.buildParam(), Aria2ResponseString.class);
     }
 
     /**
@@ -47,7 +47,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<String>>> addUris(Collection<Aria2AddUriForm> forms) {
         final List<Aria2Param> params = forms.stream().map(Aria2AddUriForm::buildParam).collect(Collectors.toList());
-        return client.call(params, Aria2ListListStringResponse.class);
+        return client.call(params, Aria2ResponseMultiString.class);
     }
 
     /**
@@ -80,7 +80,14 @@ public class Aria2Api {
     public Aria2MethodCall<Aria2Option> getOption(String gid) {
         final Aria2Param param = new Aria2Param(Aria2Method.getOption, gid);
         return client.call(param, Aria2Option.Response.class);
-
+    }
+    /**
+     * 批量获取下载参数
+     * @param gid gid
+     * @return 下载参数
+     */
+    public Aria2MethodCall<List<List<Aria2Option>>> getOption(Collection<String> gid) {
+        return client.call(gid.stream().map(g->new Aria2Param(Aria2Method.getOption, g)).collect(Collectors.toList()), Aria2Option.ResMulti.class);
     }
 
     /**
@@ -99,7 +106,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<String> remove(String gid) {
         final Aria2Param param = new Aria2Param(Aria2Method.remove, gid);
-        return client.call(param, Aria2StringResponse.class);
+        return client.call(param, Aria2ResponseString.class);
     }
 
     /**
@@ -109,7 +116,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<String> removeDownloadResult(String gid) {
         final Aria2Param param = new Aria2Param(Aria2Method.removeDownloadResult, gid);
-        return client.call(param, Aria2StringResponse.class);
+        return client.call(param, Aria2ResponseString.class);
     }
 /**
      * 批量移除停止任务
@@ -117,7 +124,7 @@ public class Aria2Api {
      * @return gid
      */
     public Aria2MethodCall<List<List<String>>> removeDownloadResult(Collection<String> gid) {
-        return client.call(gid.stream().map(g->new Aria2Param(Aria2Method.removeDownloadResult, g)).collect(Collectors.toList()), Aria2ListListStringResponse.class);
+        return client.call(gid.stream().map(g->new Aria2Param(Aria2Method.removeDownloadResult, g)).collect(Collectors.toList()), Aria2ResponseMultiString.class);
     }
 
     /**

@@ -3,7 +3,7 @@ package com.gin.aria2.dto.form;
 import com.gin.aria2.dto.base.Aria2Option;
 import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.enums.Aria2Method;
-import com.gin.aria2.response.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2Response;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

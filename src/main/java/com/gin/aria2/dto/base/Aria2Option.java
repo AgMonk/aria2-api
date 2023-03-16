@@ -1,7 +1,8 @@
 package com.gin.aria2.dto.base;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gin.aria2.response.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2ResponseMulti;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -248,5 +249,7 @@ public class Aria2Option implements Cloneable {
     }
 
     public static class Response extends Aria2Response<Aria2Option> {
+    }
+    public static class ResMulti extends Aria2ResponseMulti<Aria2Option> {
     }
 }

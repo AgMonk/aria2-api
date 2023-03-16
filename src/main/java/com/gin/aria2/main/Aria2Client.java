@@ -5,7 +5,7 @@ import com.gin.aria2.call.Aria2MethodCall;
 import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.dto.base.Aria2RequestBody;
 import com.gin.aria2.enums.Aria2Method;
-import com.gin.aria2.response.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2Response;
 import com.gin.aria2.utils.JsonUtils;
 import com.gin.aria2.utils.ObjUtils;
 import okhttp3.*;

@@ -1,4 +1,4 @@
-package com.gin.aria2.response;
+package com.gin.aria2.response.clazz;
 
 import lombok.NoArgsConstructor;
 
@@ -10,5 +10,5 @@ import java.util.List;
  * @since : 2023/3/15 16:09
  */
 @NoArgsConstructor
-public class Aria2ListResponse<T> extends Aria2Response<List<T>> {
+public class Aria2ResponseList<T> extends Aria2Response<List<T>> {
 }

@@ -2,7 +2,7 @@ package com.gin.aria2.call;
 
 import com.gin.aria2.callback.ClassAria2Callback;
 import com.gin.aria2.exception.Aria2RequestException;
-import com.gin.aria2.response.Aria2Response;
+import com.gin.aria2.response.clazz.Aria2Response;
 import com.gin.aria2.utils.JsonUtils;
 import okhttp3.Call;
 
