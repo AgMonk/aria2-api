@@ -64,7 +64,7 @@ public class Aria2TaskStatus {
         if (files == null || files.size() == 0) {
             return new ArrayList<>();
         }
-        return files.stream().flatMap(i -> i.getUris().stream()).map(Aria2TaskFile.Uri::getUri).collect(Collectors.toList());
+        return files.stream().flatMap(i -> i.getUris().stream()).map(Aria2TaskFile.Uri::getUri).distinct().collect(Collectors.toList());
     }
 
     public static class Response extends Aria2Response<Aria2TaskStatus> {

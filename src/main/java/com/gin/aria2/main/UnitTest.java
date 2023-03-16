@@ -29,12 +29,31 @@ public class UnitTest {
     );
 
     public static void main(String[] args) throws Aria2RequestException, IOException, InterruptedException {
+        // 打印请求参数
+        API.getClient().setPrintParam(true);
+
+
 //        unitTest();
+        testRetry();
+    }
+
+    private static void testRetry() throws IOException, Aria2RequestException {
+        final List<Aria2TaskStatus> tasks = API.tellStop(1, 10).sync();
+        if (tasks.size()>0) {
+            System.out.println(API.retry(tasks.get(0).getGid()));
+        }
+    }
+
+    private static void addUri() throws Aria2RequestException, IOException {
+        System.out.println("单个添加..");
+        final Aria2Option params = new Aria2Option();
+        params.setReferer("*");
+        params.setDir(DIR + "addUri/3");
+        API.addUri(new Aria2AddUriForm(Collections.singleton(URLS.get(0)), params)).sync();
     }
 
     private static void unitTest() throws IOException, Aria2RequestException, InterruptedException {
-        // 打印请求参数
-        API.getClient().setPrintParam(true);
+
 
         final Aria2Option params = new Aria2Option();
         params.setReferer("*");
@@ -64,9 +83,7 @@ public class UnitTest {
             API.remove(gid.get(0)).sync();
         }
         {
-            System.out.println("单个添加..");
-            params.setDir(DIR + "addUri/3");
-            API.addUri(new Aria2AddUriForm(Collections.singleton(URLS.get(0)), params)).sync();
+            addUri();
         }
         {
             System.out.println("查询概况统计..");

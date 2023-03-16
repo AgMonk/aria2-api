@@ -5,6 +5,7 @@ import com.gin.aria2.dto.base.Aria2Option;
 import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.dto.form.Aria2AddUriForm;
 import com.gin.aria2.enums.Aria2Method;
+import com.gin.aria2.exception.Aria2RequestException;
 import com.gin.aria2.response.clazz.Aria2ResponseMultiString;
 import com.gin.aria2.response.clazz.Aria2ResponseString;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
@@ -12,6 +13,7 @@ import com.gin.aria2.response.result.Aria2TaskStatus;
 import com.gin.aria2.response.result.Aria2Version;
 import lombok.Getter;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -210,5 +212,23 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellWaiting(int page, int size, String... keys) {
         return client.call(new Aria2Param(Aria2Method.tellWaiting, page, size, keys), Aria2TaskStatus.ResponseList.class);
+    }
+
+    /**
+     * 将一个停止任务删除重试
+     * @param gid gid
+     */
+    public String retry(String gid) throws Aria2RequestException, IOException {
+        // 获取状态
+        final Aria2TaskStatus taskStatus = tellStatus(gid).sync();
+        // 下载地址
+        final List<String> urls = taskStatus.getUrls();
+        // 下载参数
+        final Aria2Option option = getOption(gid).sync();
+        // 新建任务
+        final String res = addUri(new Aria2AddUriForm(urls, option)).sync();
+        // 删除旧任务
+        removeDownloadResult(gid).sync();
+        return res;
     }
 }
