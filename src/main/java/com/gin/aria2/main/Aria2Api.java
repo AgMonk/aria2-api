@@ -158,8 +158,8 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<List<Aria2TaskStatus>>>> tellAll(int page, int size, String... keys) {
         final Aria2Param param1 = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
-        final Aria2Param param3 = new Aria2Param(Aria2Method.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, page,size,keys);
+        final Aria2Param param3 = new Aria2Param(Aria2Method.tellStopped, page,size,keys);
         return client.call(Arrays.asList(param1, param2, param3), Aria2TaskStatus.ResMultiList.class);
     }
 
@@ -172,7 +172,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<List<Aria2TaskStatus>>>> tellQueue(int page, int size, String... keys) {
         final Aria2Param param1 = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, page,size,keys);
         return client.call(Arrays.asList(param1, param2), Aria2TaskStatus.ResMultiList.class);
     }
 
@@ -207,7 +207,7 @@ public class Aria2Api {
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellStop(int page, int size, String... keys) {
-        final Aria2Param param = new Aria2Param(Aria2Method.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        final Aria2Param param = new Aria2Param(Aria2Method.tellStopped, page,size,keys);
         return client.call(param, Aria2TaskStatus.ResponseList.class);
     }
 
@@ -219,7 +219,7 @@ public class Aria2Api {
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellWaiting(int page, int size, String... keys) {
-        final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, page,size,keys);
         return client.call(param, Aria2TaskStatus.ResponseList.class);
     }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,9 +25,24 @@ public class Aria2Param {
         this.methodName = methodName;
         this.params = params;
     }
+
     public Aria2Param(@NotNull Aria2Method methodName, Object... params) {
         this.methodName = methodName;
         this.params = Arrays.asList(params);
     }
+
+    public Aria2Param(@NotNull Aria2Method methodName, String gid) {
+        this.methodName = methodName;
+        this.params = Collections.singletonList(gid);
+    }
+
+    /**
+     * 分页查询参数的构造方法
+     */
+    public Aria2Param(@NotNull Aria2Method methodName, int page, int size, String... keys) {
+        this.methodName = methodName;
+        this.params = Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys));
+    }
+
 
 }
