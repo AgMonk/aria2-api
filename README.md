@@ -10,7 +10,7 @@ aria2Api-api
     <repositories>
         <repository>
             <id>com.gin.aria2</id>
-            <name>aria2Api-ap</name>
+            <name>aria2Api</name>
             <url>https://agmonk.github.io/aria2Api-api/maven-repo/</url>
         </repository>
     </repositories>
@@ -25,3 +25,7 @@ aria2Api-api
 
 </project>
 ```
+
+# 使用
+
+见 [Demo](./src/main/java/com/gin/aria2/main/Demo.java)
