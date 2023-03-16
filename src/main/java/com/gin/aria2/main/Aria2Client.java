@@ -25,7 +25,15 @@ public class Aria2Client {
     final String host;
     final OkHttpClient client;
     final String token;
+    /**
+     * 是否打印请求参数
+     */
+    boolean printParam = false;
     int id = 0;
+
+    public void setPrintParam(boolean printParam) {
+        this.printParam = printParam;
+    }
 
     public Aria2Client(OkHttpClient client, String host, String token) {
         this.host = ObjUtils.isEmpty(host) ? DEFAULT_HOST : host;
@@ -37,10 +45,20 @@ public class Aria2Client {
         this(null, null, null);
     }
 
+    /**
+     * 发送单个请求
+     * @param param 参数
+     * @return Call
+     */
+
     public Aria2Call call(Aria2Param param) {
         return new Aria2Call(pCall(param));
     }
-
+    /**
+     * 发送单个请求
+     * @param param 参数
+     * @return Call
+     */
     public <T> Aria2MethodCall<T> call(Aria2Param param, Class<? extends Aria2Response<T>> responseClass) {
         return new Aria2MethodCall<>(pCall(param), responseClass);
     }
@@ -77,7 +95,9 @@ public class Aria2Client {
         }
 
         final Aria2RequestBody aria2RequestBody = new Aria2RequestBody(String.valueOf(this.id++), param.getMethodName().getName(), params);
-        JsonUtils.printJson(aria2RequestBody);
+        if (printParam) {
+            JsonUtils.printJson(aria2RequestBody);
+        }
         final RequestBody requestBody = RequestBody.create(JsonUtils.obj2Str(aria2RequestBody), MEDIA_TYPE_JSON);
         final Request request = new Request.Builder().url(host).post(requestBody).build();
         return this.client.newCall(request);

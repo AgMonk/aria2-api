@@ -33,12 +33,10 @@ public class Aria2Api {
 
     /**
      * 添加单个任务
-     * @param urls   下载地址
-     * @param params 参数
+     * @param form  表单
      */
-    public Aria2MethodCall<String> addUri(Collection<String> urls, Aria2Option params) {
-        final Aria2Param param = new Aria2Param(Aria2Method.addUri, urls, params);
-        return client.call(param, Aria2StringResponse.class);
+    public Aria2MethodCall<String> addUri(Aria2AddUriForm form) {
+        return client.call(form.buildParam(), Aria2StringResponse.class);
     }
 
     /**

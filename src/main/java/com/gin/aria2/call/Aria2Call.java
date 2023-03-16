@@ -21,7 +21,7 @@ public class Aria2Call {
     }
 
     /**
-     * 异步请求
+     * 异步请求, 回调参数为字符串类型
      * @param callback 回调方法
      */
     public void asyncString(AbstractAria2Callback callback) {
