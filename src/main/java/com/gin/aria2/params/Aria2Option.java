@@ -1,6 +1,7 @@
 package com.gin.aria2.params;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gin.aria2.response.Aria2Response;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -164,6 +165,9 @@ public class Aria2Option {
     String useHead;
     @JsonProperty("user-agent")
     String userAgent;
+
+    public static class Response extends Aria2Response<Aria2Option> {
+    }
 
 
 }

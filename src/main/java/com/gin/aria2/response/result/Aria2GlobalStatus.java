@@ -1,6 +1,8 @@
 package com.gin.aria2.response.result;
 
-import lombok.Data;
+import com.gin.aria2.response.Aria2Response;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 概况统计
@@ -8,7 +10,8 @@ import lombok.Data;
  * @version : v1.0.0
  * @since : 2022/10/21 15:20
  */
-@Data
+@Getter
+@Setter
 public class Aria2GlobalStatus {
     Integer numActive;
     Integer numWaiting;
@@ -16,4 +19,7 @@ public class Aria2GlobalStatus {
     Long uploadSpeed;
     Integer numStopped;
     Integer numStoppedTotal;
+
+    public static class Response extends Aria2Response<Aria2GlobalStatus> {
+    }
 }

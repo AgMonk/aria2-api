@@ -3,8 +3,10 @@ package com.gin.aria2.main;
 import com.gin.aria2.call.Aria2MethodCall;
 import com.gin.aria2.dto.Aria2Param;
 import com.gin.aria2.enums.Aria2Method;
+import com.gin.aria2.params.Aria2Option;
 import com.gin.aria2.params.methods.AddUriParam;
 import com.gin.aria2.response.Aria2StringResponse;
+import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2Task;
 
 import java.util.Arrays;
@@ -22,6 +24,36 @@ public class Aria2Api {
 
     public Aria2Api(Aria2Client client) {
         this.client = client;
+    }
+
+    /**
+     * 添加单个任务
+     * @param urls   下载地址
+     * @param params 参数
+     */
+    public Aria2MethodCall<String> addUri(Collection<String> urls, AddUriParam params) {
+        final Aria2Param param = new Aria2Param(Aria2Method.addUri, urls, params);
+        return client.call(param, Aria2StringResponse.class);
+    }
+
+    /**
+     * 获取概况统计
+     * @return 概况统计
+     */
+    public Aria2MethodCall<Aria2GlobalStatus> getGlobalStat() {
+        final Aria2Param param = new Aria2Param(Aria2Method.getGlobalStat);
+        return client.call(param, Aria2GlobalStatus.Response.class);
+    }
+
+    /**
+     * 获取下载参数
+     * @param gid gid
+     * @return 下载参数
+     */
+    public Aria2MethodCall<Aria2Option> getOption(String gid) {
+        final Aria2Param param = new Aria2Param(Aria2Method.getOption, gid);
+        return client.call(param, Aria2Option.Response.class);
+
     }
 
     /**
@@ -87,16 +119,6 @@ public class Aria2Api {
     public Aria2MethodCall<List<Aria2Task>> tellWaiting(int page, int size, String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
         return client.call(param, Aria2Task.ListResponse.class);
-    }
-
-    /**
-     * 添加单个任务
-     * @param urls   下载地址
-     * @param params 参数
-     */
-    public Aria2MethodCall<String> addUri(Collection<String> urls, AddUriParam params){
-        final Aria2Param param = new Aria2Param(Aria2Method.addUri, urls, params);
-        return client.call(param, Aria2StringResponse.class);
     }
     //todo 批量添加下载任务
     //todo 批量移除下载完成的任务
