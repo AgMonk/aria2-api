@@ -5,6 +5,7 @@ import com.gin.aria2.dto.base.Aria2Option;
 import com.gin.aria2.dto.base.Aria2Param;
 import com.gin.aria2.dto.form.Aria2AddUriForm;
 import com.gin.aria2.enums.Aria2Method;
+import com.gin.aria2.response.Aria2ListListStringResponse;
 import com.gin.aria2.response.Aria2StringResponse;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2TaskStatus;
@@ -46,7 +47,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<String>>> addUris(Collection<Aria2AddUriForm> forms) {
         final List<Aria2Param> params = forms.stream().map(Aria2AddUriForm::buildParam).collect(Collectors.toList());
-        return client.call(params, Aria2AddUriForm.Response.class);
+        return client.call(params, Aria2ListListStringResponse.class);
     }
 
     /**
@@ -102,13 +103,21 @@ public class Aria2Api {
     }
 
     /**
-     * 移除下载完成的任务
+     * 移除停止任务
      * @param gid gid
      * @return gid
      */
     public Aria2MethodCall<String> removeDownloadResult(String gid) {
         final Aria2Param param = new Aria2Param(Aria2Method.removeDownloadResult, gid);
         return client.call(param, Aria2StringResponse.class);
+    }
+/**
+     * 批量移除停止任务
+     * @param gid gid
+     * @return gid
+     */
+    public Aria2MethodCall<List<List<String>>> removeDownloadResult(Collection<String> gid) {
+        return client.call(gid.stream().map(g->new Aria2Param(Aria2Method.removeDownloadResult, g)).collect(Collectors.toList()), Aria2ListListStringResponse.class);
     }
 
     /**
@@ -155,6 +164,4 @@ public class Aria2Api {
         final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
         return client.call(param, Aria2TaskStatus.ListResponse.class);
     }
-    //todo 批量移除下载完成的任务
-
-}   
+}
