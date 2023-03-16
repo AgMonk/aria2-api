@@ -1,6 +1,4 @@
-# aria2Api-api
-
-aria2Api-api
+# aria2-api
 
 # 引入
 
