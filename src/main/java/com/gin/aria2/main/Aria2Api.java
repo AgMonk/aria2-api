@@ -52,8 +52,7 @@ public class Aria2Api {
 
     /**
      * 批量添加任务，每个url为一个任务，使用相同下载参数
-     * @param urls   urls
-     * @param params 下载参数
+     * @param form 表单
      * @return gid
      */
     public Aria2MethodCall<List<List<String>>> addUris(Aria2AddUriForm form) {

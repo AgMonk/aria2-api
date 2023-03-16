@@ -1,5 +1,6 @@
 package com.gin.aria2.response.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gin.aria2.enums.TaskStatus;
 import com.gin.aria2.response.clazz.Aria2Response;
 import com.gin.aria2.response.clazz.Aria2ResponseList;
@@ -8,7 +9,9 @@ import com.gin.aria2.response.field.Aria2TaskFile;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 任务状态
@@ -47,6 +50,22 @@ public class Aria2TaskStatus {
     Object bittorrent;
     String verifiedLength;
     String verifyIntegrityPending;
+
+    @JsonIgnore
+    public List<String> getFilePath() {
+        if (files == null || files.size() == 0) {
+            return new ArrayList<>();
+        }
+        return files.stream().map(Aria2TaskFile::getPath).collect(Collectors.toList());
+    }
+
+    @JsonIgnore
+    public List<String> getUrls() {
+        if (files == null || files.size() == 0) {
+            return new ArrayList<>();
+        }
+        return files.stream().flatMap(i -> i.getUris().stream()).map(Aria2TaskFile.Uri::getUri).collect(Collectors.toList());
+    }
 
     public static class Response extends Aria2Response<Aria2TaskStatus> {
     }

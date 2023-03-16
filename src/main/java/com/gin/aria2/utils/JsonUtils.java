@@ -11,6 +11,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 /**
@@ -75,5 +79,19 @@ public class JsonUtils {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void write2File(Object obj,File file) throws IOException {
+        if (!file.getParentFile().exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            file.getParentFile().mkdirs();
+        }
+        try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
+            pw.write(JsonUtils.obj2Str(obj));
+        }
+    }
+
+    public static void write2File(Object obj,String path) throws IOException {
+        write2File(obj,new File(path));
     }
 }
