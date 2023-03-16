@@ -239,8 +239,12 @@ public class Aria2Option implements Cloneable {
     String userAgent;
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Aria2Option clone()  {
+        try {
+            return (Aria2Option) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static class Response extends Aria2Response<Aria2Option> {

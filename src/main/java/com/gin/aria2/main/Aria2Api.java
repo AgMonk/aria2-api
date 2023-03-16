@@ -1,9 +1,10 @@
 package com.gin.aria2.main;
 
 import com.gin.aria2.call.Aria2MethodCall;
-import com.gin.aria2.dto.base.Aria2Param;
-import com.gin.aria2.enums.Aria2Method;
 import com.gin.aria2.dto.base.Aria2Option;
+import com.gin.aria2.dto.base.Aria2Param;
+import com.gin.aria2.dto.form.Aria2AddUriForm;
+import com.gin.aria2.enums.Aria2Method;
 import com.gin.aria2.response.Aria2StringResponse;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2Task;
@@ -12,7 +13,9 @@ import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * api <a href="https://aria2.github.io/manual/en/html/aria2c.html">API文档</a>
@@ -36,6 +39,29 @@ public class Aria2Api {
     public Aria2MethodCall<String> addUri(Collection<String> urls, Aria2Option params) {
         final Aria2Param param = new Aria2Param(Aria2Method.addUri, urls, params);
         return client.call(param, Aria2StringResponse.class);
+    }
+
+    /**
+     * 批量添加任务
+     * @param forms 表单
+     * @return gid
+     */
+    public Aria2MethodCall<List<List<String>>> addUris(Collection<Aria2AddUriForm> forms) {
+        final List<Aria2Param> params = forms.stream().map(Aria2AddUriForm::buildParam).collect(Collectors.toList());
+        return client.call(params, Aria2AddUriForm.Response.class);
+    }
+
+    /**
+     * 批量添加任务，每个url为一个任务，使用相同下载参数
+     * @param urls   urls
+     * @param params 下载参数
+     * @return gid
+     */
+    public Aria2MethodCall<List<List<String>>> addUris(Collection<String> urls, Aria2Option params) {
+        return addUris(urls.stream()
+                               .map(url -> new Aria2AddUriForm(Collections.singleton(url), params.clone()))
+                               .collect(Collectors.toList())
+        );
     }
 
     /**
@@ -89,7 +115,7 @@ public class Aria2Api {
 
     /**
      * 查询活动任务
-     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2Task>> tellActive(String... keys) {
@@ -100,7 +126,7 @@ public class Aria2Api {
     /**
      * 查询单个任务状态
      * @param gid  gid
-     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<Aria2Task> tellStatus(String gid, String... keys) {
@@ -112,7 +138,7 @@ public class Aria2Api {
      * 查询停止任务
      * @param page 页数
      * @param size 每页条数
-     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2Task>> tellStop(int page, int size, String... keys) {
@@ -124,7 +150,7 @@ public class Aria2Api {
      * 查询等待任务
      * @param page 页数
      * @param size 每页条数
-     * @param keys  <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2Task>> tellWaiting(int page, int size, String... keys) {

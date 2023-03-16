@@ -10,7 +10,7 @@ import com.gin.aria2.utils.JsonUtils;
 import com.gin.aria2.utils.ObjUtils;
 import okhttp3.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,16 +46,22 @@ public class Aria2Client {
     }
 
     /**
-     * 一次发送多个请求
+     * 批量发送请求
      * @param params 参数
      * @return Call
      */
     public Aria2Call call(List<Aria2Param> params) {
-        return call(new Aria2Param(Aria2Method.multicall, new ArrayList<>(params)));
+        return call(new Aria2Param(Aria2Method.multicall, Collections.singletonList(params)));
     }
 
+    /**
+     * 批量发送请求
+     * @param params 请求参数
+     * @param responseClass 响应类型
+     * @return Call
+     */
     public <T> Aria2MethodCall<T> call(List<Aria2Param> params, Class<? extends Aria2Response<T>> responseClass) {
-        final Aria2Param param = new Aria2Param(Aria2Method.multicall, new ArrayList<>(params));
+        final Aria2Param param = new Aria2Param(Aria2Method.multicall, Collections.singletonList(params));
         return call(param, responseClass);
     }
 
@@ -69,7 +75,9 @@ public class Aria2Client {
         if (!ObjUtils.isEmpty(this.token)) {
             params.add(0, "token:" + token);
         }
+
         final Aria2RequestBody aria2RequestBody = new Aria2RequestBody(String.valueOf(this.id++), param.getMethodName().getName(), params);
+        JsonUtils.printJson(aria2RequestBody);
         final RequestBody requestBody = RequestBody.create(JsonUtils.obj2Str(aria2RequestBody), MEDIA_TYPE_JSON);
         final Request request = new Request.Builder().url(host).post(requestBody).build();
         return this.client.newCall(request);
