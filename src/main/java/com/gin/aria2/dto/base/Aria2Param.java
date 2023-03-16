@@ -5,8 +5,10 @@ import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 请求参数
@@ -44,5 +46,8 @@ public class Aria2Param {
         this.params = Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys));
     }
 
+    public static List<Aria2Param> listOf(@NotNull Aria2Method methodName, Collection<String> gid){
+        return gid.stream().map(g -> new Aria2Param(methodName, g)).collect(Collectors.toList());
+    }
 
 }

@@ -68,8 +68,7 @@ public class Aria2Api {
      * @return 概况统计
      */
     public Aria2MethodCall<Aria2GlobalStatus> getGlobalStat() {
-        final Aria2Param param = new Aria2Param(Aria2Method.getGlobalStat);
-        return client.call(param, Aria2GlobalStatus.Response.class);
+        return client.call(new Aria2Param(Aria2Method.getGlobalStat), Aria2GlobalStatus.Response.class);
     }
 
     /**
@@ -78,8 +77,7 @@ public class Aria2Api {
      * @return 下载参数
      */
     public Aria2MethodCall<Aria2Option> getOption(String gid) {
-        final Aria2Param param = new Aria2Param(Aria2Method.getOption, gid);
-        return client.call(param, Aria2Option.Response.class);
+        return client.call(new Aria2Param(Aria2Method.getOption, gid), Aria2Option.Response.class);
     }
 
     /**
@@ -88,7 +86,7 @@ public class Aria2Api {
      * @return 下载参数
      */
     public Aria2MethodCall<List<List<Aria2Option>>> getOption(Collection<String> gid) {
-        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.getOption, g)).collect(Collectors.toList()), Aria2Option.ResMulti.class);
+        return client.call(Aria2Param.listOf(Aria2Method.getOption, gid), Aria2Option.ResMulti.class);
     }
 
     /**
@@ -96,8 +94,7 @@ public class Aria2Api {
      * @return 版本信息
      */
     public Aria2MethodCall<Aria2Version> getVersion() {
-        final Aria2Param param = new Aria2Param(Aria2Method.getVersion);
-        return client.call(param, Aria2Version.Response.class);
+        return client.call(new Aria2Param(Aria2Method.getVersion), Aria2Version.Response.class);
     }
 
     /**
@@ -106,8 +103,7 @@ public class Aria2Api {
      * @return gid
      */
     public Aria2MethodCall<String> remove(String gid) {
-        final Aria2Param param = new Aria2Param(Aria2Method.remove, gid);
-        return client.call(param, Aria2ResponseString.class);
+        return client.call(new Aria2Param(Aria2Method.remove, gid), Aria2ResponseString.class);
     }
 
     /**
@@ -116,7 +112,7 @@ public class Aria2Api {
      * @return gid
      */
     public Aria2MethodCall<List<List<String>>> remove(Collection<String> gid) {
-        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.remove, g)).collect(Collectors.toList()), Aria2ResponseMultiString.class);
+        return client.call(Aria2Param.listOf(Aria2Method.remove, gid), Aria2ResponseMultiString.class);
     }
 
     /**
@@ -125,8 +121,7 @@ public class Aria2Api {
      * @return gid
      */
     public Aria2MethodCall<String> removeDownloadResult(String gid) {
-        final Aria2Param param = new Aria2Param(Aria2Method.removeDownloadResult, gid);
-        return client.call(param, Aria2ResponseString.class);
+        return client.call(new Aria2Param(Aria2Method.removeDownloadResult, gid), Aria2ResponseString.class);
     }
 
     /**
@@ -135,8 +130,7 @@ public class Aria2Api {
      * @return gid
      */
     public Aria2MethodCall<List<List<String>>> removeDownloadResult(Collection<String> gid) {
-        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.removeDownloadResult, g)).collect(Collectors.toList()),
-                           Aria2ResponseMultiString.class);
+        return client.call(Aria2Param.listOf(Aria2Method.removeDownloadResult, gid), Aria2ResponseMultiString.class);
     }
 
     /**
@@ -145,8 +139,7 @@ public class Aria2Api {
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellActive(String... keys) {
-        final Aria2Param param = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        return client.call(param, Aria2TaskStatus.ResponseList.class);
+        return client.call(new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys)), Aria2TaskStatus.ResponseList.class);
     }
 
     /**
@@ -158,8 +151,8 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<List<Aria2TaskStatus>>>> tellAll(int page, int size, String... keys) {
         final Aria2Param param1 = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, page,size,keys);
-        final Aria2Param param3 = new Aria2Param(Aria2Method.tellStopped, page,size,keys);
+        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, page, size, keys);
+        final Aria2Param param3 = new Aria2Param(Aria2Method.tellStopped, page, size, keys);
         return client.call(Arrays.asList(param1, param2, param3), Aria2TaskStatus.ResMultiList.class);
     }
 
@@ -172,7 +165,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<List<Aria2TaskStatus>>>> tellQueue(int page, int size, String... keys) {
         final Aria2Param param1 = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, page,size,keys);
+        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, page, size, keys);
         return client.call(Arrays.asList(param1, param2), Aria2TaskStatus.ResMultiList.class);
     }
 
@@ -183,8 +176,7 @@ public class Aria2Api {
      * @return 任务状态
      */
     public Aria2MethodCall<Aria2TaskStatus> tellStatus(String gid, String... keys) {
-        final Aria2Param param = new Aria2Param(Aria2Method.tellStatus, Arrays.asList(gid, Arrays.asList(keys)));
-        return client.call(param, Aria2TaskStatus.Response.class);
+        return client.call(new Aria2Param(Aria2Method.tellStatus, Arrays.asList(gid, Arrays.asList(keys))), Aria2TaskStatus.Response.class);
     }
 
     /**
@@ -207,8 +199,7 @@ public class Aria2Api {
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellStop(int page, int size, String... keys) {
-        final Aria2Param param = new Aria2Param(Aria2Method.tellStopped, page,size,keys);
-        return client.call(param, Aria2TaskStatus.ResponseList.class);
+        return client.call(new Aria2Param(Aria2Method.tellStopped, page, size, keys), Aria2TaskStatus.ResponseList.class);
     }
 
     /**
@@ -219,7 +210,6 @@ public class Aria2Api {
      * @return 任务状态
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellWaiting(int page, int size, String... keys) {
-        final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, page,size,keys);
-        return client.call(param, Aria2TaskStatus.ResponseList.class);
+        return client.call(new Aria2Param(Aria2Method.tellWaiting, page, size, keys), Aria2TaskStatus.ResponseList.class);
     }
 }
