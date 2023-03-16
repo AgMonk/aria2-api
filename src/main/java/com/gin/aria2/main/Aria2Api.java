@@ -34,7 +34,7 @@ public class Aria2Api {
 
     /**
      * 添加单个任务
-     * @param form  表单
+     * @param form 表单
      */
     public Aria2MethodCall<String> addUri(Aria2AddUriForm form) {
         return client.call(form.buildParam(), Aria2ResponseString.class);
@@ -81,13 +81,14 @@ public class Aria2Api {
         final Aria2Param param = new Aria2Param(Aria2Method.getOption, gid);
         return client.call(param, Aria2Option.Response.class);
     }
+
     /**
      * 批量获取下载参数
      * @param gid gid
      * @return 下载参数
      */
     public Aria2MethodCall<List<List<Aria2Option>>> getOption(Collection<String> gid) {
-        return client.call(gid.stream().map(g->new Aria2Param(Aria2Method.getOption, g)).collect(Collectors.toList()), Aria2Option.ResMulti.class);
+        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.getOption, g)).collect(Collectors.toList()), Aria2Option.ResMulti.class);
     }
 
     /**
@@ -110,6 +111,15 @@ public class Aria2Api {
     }
 
     /**
+     * 批量移除下载中的任务
+     * @param gid gid
+     * @return gid
+     */
+    public Aria2MethodCall<List<List<String>>> remove(Collection<String> gid) {
+        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.remove, g)).collect(Collectors.toList()), Aria2ResponseMultiString.class);
+    }
+
+    /**
      * 移除停止任务
      * @param gid gid
      * @return gid
@@ -118,13 +128,15 @@ public class Aria2Api {
         final Aria2Param param = new Aria2Param(Aria2Method.removeDownloadResult, gid);
         return client.call(param, Aria2ResponseString.class);
     }
-/**
+
+    /**
      * 批量移除停止任务
      * @param gid gid
      * @return gid
      */
     public Aria2MethodCall<List<List<String>>> removeDownloadResult(Collection<String> gid) {
-        return client.call(gid.stream().map(g->new Aria2Param(Aria2Method.removeDownloadResult, g)).collect(Collectors.toList()), Aria2ResponseMultiString.class);
+        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.removeDownloadResult, g)).collect(Collectors.toList()),
+                           Aria2ResponseMultiString.class);
     }
 
     /**
@@ -134,7 +146,34 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellActive(String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
-        return client.call(param, Aria2TaskStatus.ListResponse.class);
+        return client.call(param, Aria2TaskStatus.ResponseList.class);
+    }
+
+    /**
+     * 查询所有任务
+     * @param page 页数
+     * @param size 每页条数
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @return 任务状态
+     */
+    public Aria2MethodCall<List<List<List<Aria2TaskStatus>>>> tellAll(int page, int size, String... keys) {
+        final Aria2Param param1 = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
+        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        final Aria2Param param3 = new Aria2Param(Aria2Method.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        return client.call(Arrays.asList(param1, param2, param3), Aria2TaskStatus.ResMultiList.class);
+    }
+
+    /**
+     * 查询队列中的任务(tellActive+tellWaiting)
+     * @param page 页数
+     * @param size 每页条数
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @return 任务状态
+     */
+    public Aria2MethodCall<List<List<List<Aria2TaskStatus>>>> tellQueue(int page, int size, String... keys) {
+        final Aria2Param param1 = new Aria2Param(Aria2Method.tellActive, Arrays.asList(keys));
+        final Aria2Param param2 = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
+        return client.call(Arrays.asList(param1, param2), Aria2TaskStatus.ResMultiList.class);
     }
 
     /**
@@ -149,6 +188,18 @@ public class Aria2Api {
     }
 
     /**
+     * 查询多个任务状态
+     * @param gid  gid
+     * @param keys <a href="https://aria2.github.io/manual/en/html/aria2c.html#aria2.tellStatus">字段</a>
+     * @return 任务状态
+     */
+    public Aria2MethodCall<List<List<Aria2TaskStatus>>> tellStatus(Collection<String> gid, String... keys) {
+        return client.call(gid.stream().map(g -> new Aria2Param(Aria2Method.tellStatus,
+                                                                Arrays.asList(g, Arrays.asList(keys)))).collect(Collectors.toList()),
+                           Aria2TaskStatus.ResMulti.class);
+    }
+
+    /**
      * 查询停止任务
      * @param page 页数
      * @param size 每页条数
@@ -157,7 +208,7 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellStop(int page, int size, String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellStopped, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
-        return client.call(param, Aria2TaskStatus.ListResponse.class);
+        return client.call(param, Aria2TaskStatus.ResponseList.class);
     }
 
     /**
@@ -169,6 +220,6 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<Aria2TaskStatus>> tellWaiting(int page, int size, String... keys) {
         final Aria2Param param = new Aria2Param(Aria2Method.tellWaiting, Arrays.asList(Math.max(0, (page - 1) * size), size, Arrays.asList(keys)));
-        return client.call(param, Aria2TaskStatus.ListResponse.class);
+        return client.call(param, Aria2TaskStatus.ResponseList.class);
     }
 }
