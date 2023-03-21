@@ -94,7 +94,7 @@ public class Aria2Client {
             params.add(0, "token:" + token);
         }
 
-        final Aria2RequestBody aria2RequestBody = new Aria2RequestBody(String.valueOf(this.id++), param.getMethodName().getName(), params);
+        final Aria2RequestBody aria2RequestBody = new Aria2RequestBody(this.id++, param.getMethodName().getName(), params);
         if (printParam) {
             JsonUtils.printJson(aria2RequestBody);
         }

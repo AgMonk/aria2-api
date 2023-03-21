@@ -1,5 +1,7 @@
 package com.gin.aria2.dto.base;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Getter;
 
 import java.util.List;
@@ -12,12 +14,14 @@ import java.util.List;
  */
 @Getter
 public class Aria2RequestBody {
-    final String id;
-    final String jsonrpc = "2.0";
+    @JsonSerialize(using = ToStringSerializer.class)
+    final int id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    final double jsonrpc = 2.0;
     final String method;
     final List<Object> params;
 
-    public Aria2RequestBody(String id, String method, List<Object> params) {
+    public Aria2RequestBody(int id, String method, List<Object> params) {
         this.id = id;
         this.method = method;
         this.params = params;
