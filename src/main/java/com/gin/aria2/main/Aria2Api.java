@@ -238,7 +238,7 @@ public class Aria2Api {
      * @param gid gid
      * @return 旧gid到新gid的映射
      */
-    private HashMap<String ,String > retryGid(Collection<String> gid) throws IOException, Aria2RequestException {
+    public HashMap<String ,String > retryGid(Collection<String> gid) throws IOException, Aria2RequestException {
         return retryTask(tellStatus(gid,"gid","files").sync().stream().flatMap(Collection::stream).collect(Collectors.toList()));
     }
     /**
@@ -246,7 +246,7 @@ public class Aria2Api {
      * @param taskStatus 任务状态
      * @return 旧gid到新gid的映射
      */
-    private HashMap<String ,String > retryTask(Collection<Aria2TaskStatus> taskStatus) throws IOException, Aria2RequestException {
+    public HashMap<String ,String > retryTask(Collection<Aria2TaskStatus> taskStatus) throws IOException, Aria2RequestException {
         final List<String> gidList = taskStatus.stream().map(Aria2TaskStatus::getGid).collect(Collectors.toList());
         final List<Aria2Option> options = getOption(gidList).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
 
