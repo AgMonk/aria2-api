@@ -250,17 +250,16 @@ public class Aria2Api {
         final List<String> gidList = taskStatus.stream().map(Aria2TaskStatus::getGid).collect(Collectors.toList());
         final List<Aria2Option> options = getOption(gidList).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
 
-        // 请求参数
-        final List<Aria2AddUriForm> forms = gidList.stream().map(gid -> {
-            final Aria2TaskStatus task = taskStatus.stream().filter(i -> i.getGid().equals(gid)).findFirst().orElse(null);
-            final Aria2Option option = options.stream().filter(i -> i.getGid().equals(gid)).findFirst().orElse(null);
-
+        final List<Aria2AddUriForm> forms = new ArrayList<>();
+        for (int i = 0; i < taskStatus.size(); i++) {
+            final String gid = gidList.get(i);
+            final Aria2TaskStatus task = taskStatus.stream().filter(t -> t.getGid().equals(gid)).findFirst().orElse(null);
+            final Aria2Option option = options.get(i);
             if (task != null && option != null) {
-                return new Aria2AddUriForm(task.getUrls(), option);
+                forms.add(new Aria2AddUriForm(task.getUrls(), option));
             }
-            return null;
-        }).filter(Objects::nonNull).collect(Collectors.toList());
-
+        }
+        // 请求参数
         final List<String> resGid = addUris(forms).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
 
         final HashMap<String, String> map = new HashMap<>();
