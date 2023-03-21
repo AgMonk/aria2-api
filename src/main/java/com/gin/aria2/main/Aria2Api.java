@@ -219,16 +219,21 @@ public class Aria2Api {
      * @param gid gid
      */
     public String retry(String gid) throws Aria2RequestException, IOException {
-        // 获取状态
-        final Aria2TaskStatus taskStatus = tellStatus(gid).sync();
+        return retry(tellStatus(gid).sync());
+    }
+    /**
+     * 将一个停止任务删除重试
+     * @param taskStatus 任务状态
+     */
+    private String retry(Aria2TaskStatus taskStatus) throws IOException, Aria2RequestException {
         // 下载地址
         final List<String> urls = taskStatus.getUrls();
         // 下载参数
-        final Aria2Option option = getOption(gid).sync();
+        final Aria2Option option = getOption(taskStatus.getGid()).sync();
         // 新建任务
         final String res = addUri(new Aria2AddUriForm(urls, option)).sync();
         // 删除旧任务
-        removeDownloadResult(gid).sync();
+        removeDownloadResult(taskStatus.getGid()).sync();
         return res;
     }
 }
