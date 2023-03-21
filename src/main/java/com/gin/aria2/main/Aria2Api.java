@@ -14,10 +14,7 @@ import com.gin.aria2.response.result.Aria2Version;
 import lombok.Getter;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -236,4 +233,43 @@ public class Aria2Api {
         removeDownloadResult(taskStatus.getGid()).sync();
         return res;
     }
+    /**
+     * 批量重试任务
+     * @param gid gid
+     * @return 旧gid到新gid的映射
+     */
+    private HashMap<String ,String > retryGid(Collection<String> gid) throws IOException, Aria2RequestException {
+        return retryTask(tellStatus(gid,"gid","files").sync().stream().flatMap(Collection::stream).collect(Collectors.toList()));
+    }
+    /**
+     * 批量重试任务
+     * @param taskStatus 任务状态
+     * @return 旧gid到新gid的映射
+     */
+    private HashMap<String ,String > retryTask(Collection<Aria2TaskStatus> taskStatus) throws IOException, Aria2RequestException {
+        final List<String> gidList = taskStatus.stream().map(Aria2TaskStatus::getGid).collect(Collectors.toList());
+        final List<Aria2Option> options = getOption(gidList).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
+
+        // 请求参数
+        final List<Aria2AddUriForm> forms = gidList.stream().map(gid -> {
+            final Aria2TaskStatus task = taskStatus.stream().filter(i -> i.getGid().equals(gid)).findFirst().orElse(null);
+            final Aria2Option option = options.stream().filter(i -> i.getGid().equals(gid)).findFirst().orElse(null);
+
+            if (task != null && option != null) {
+                return new Aria2AddUriForm(task.getUrls(), option);
+            }
+            return null;
+        }).filter(Objects::nonNull).collect(Collectors.toList());
+
+        final List<String> resGid = addUris(forms).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
+
+        final HashMap<String, String> map = new HashMap<>();
+        for (int i = 0; i < gidList.size(); i++) {
+            final String key = gidList.get(i);
+            final String value = resGid.get(i);
+            map.put(key,value);
+        }
+        return map;
+    }
+
 }
