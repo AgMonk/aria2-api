@@ -1,11 +1,9 @@
 package com.gin.aria2.main;
 
 import com.gin.aria2.call.Aria2MethodCall;
-import com.gin.aria2.callback.ClassAria2Callback;
 import com.gin.aria2.exception.Aria2RequestException;
 import com.gin.aria2.response.result.Aria2Version;
 import com.gin.aria2.utils.JsonUtils;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -16,7 +14,7 @@ import java.io.IOException;
  * @since : 2023/3/16 11:55
  */
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Aria2RequestException, IOException {
         // 1、 创建客户端,也可以使用另一个构造函数, 指定OkHttp客户端, Aria2地址, 密码
         final Aria2Client client = new Aria2Client();
         // 1.1、 在控制台打印请求参数
@@ -33,11 +31,6 @@ public class Demo {
             throw new RuntimeException(e);
         }
         // 4.2 异步
-        api.getVersion().async(new ClassAria2Callback<Aria2Version>() {
-            @Override
-            public void onSuccess(@Nullable Aria2Version res) {
-                JsonUtils.printJson(res);
-            }
-        });
+        JsonUtils.printJson(api.getGlobalOption().sync());
     }
 }

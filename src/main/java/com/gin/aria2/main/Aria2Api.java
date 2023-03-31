@@ -8,6 +8,7 @@ import com.gin.aria2.enums.Aria2Method;
 import com.gin.aria2.exception.Aria2RequestException;
 import com.gin.aria2.response.clazz.Aria2ResponseMultiString;
 import com.gin.aria2.response.clazz.Aria2ResponseString;
+import com.gin.aria2.response.result.Aria2GlobalOption;
 import com.gin.aria2.response.result.Aria2GlobalStatus;
 import com.gin.aria2.response.result.Aria2TaskStatus;
 import com.gin.aria2.response.result.Aria2Version;
@@ -85,6 +86,14 @@ public class Aria2Api {
      */
     public Aria2MethodCall<List<List<Aria2Option>>> getOption(Collection<String> gid) {
         return client.call(Aria2Param.listOf(Aria2Method.getOption, gid), Aria2Option.ResMulti.class);
+    }
+
+    /**
+     * 获取全局配置
+     * @return 全局配置
+     */
+    public Aria2MethodCall<Aria2GlobalOption> getGlobalOption() {
+        return client.call(new Aria2Param(Aria2Method.getGlobalOption), Aria2GlobalOption.Response.class);
     }
 
     /**

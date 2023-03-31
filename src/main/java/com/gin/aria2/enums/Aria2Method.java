@@ -50,6 +50,10 @@ public enum Aria2Method {
      */
     getVersion("aria2.getVersion"),
     /**
+     * 获取全局配置
+     */
+    getGlobalOption("aria2.getGlobalOption"),
+    /**
      *批量发送请求
      */
     multicall("system.multicall"),
