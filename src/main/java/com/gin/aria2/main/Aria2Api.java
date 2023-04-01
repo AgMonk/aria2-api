@@ -257,8 +257,10 @@ public class Aria2Api {
      */
     public HashMap<String ,String > retryTask(Collection<Aria2TaskStatus> taskStatus) throws IOException, Aria2RequestException {
         final List<String> gidList = taskStatus.stream().map(Aria2TaskStatus::getGid).collect(Collectors.toList());
+        // 获取下载参数
         final List<Aria2Option> options = getOption(gidList).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
 
+        // 构建请求参数
         final List<Aria2AddUriForm> forms = new ArrayList<>();
         for (int i = 0; i < taskStatus.size(); i++) {
             final String gid = gidList.get(i);
@@ -268,8 +270,11 @@ public class Aria2Api {
                 forms.add(new Aria2AddUriForm(task.getUrls(), option));
             }
         }
-        // 请求参数
+        // 批量发送请求
         final List<String> resGid = addUris(forms).sync().stream().flatMap(Collection::stream).collect(Collectors.toList());
+
+        // 删除旧任务
+        removeDownloadResult(gidList).sync();
 
         final HashMap<String, String> map = new HashMap<>();
         for (int i = 0; i < gidList.size(); i++) {
