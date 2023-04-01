@@ -56,7 +56,7 @@ public class Aria2TaskStatus {
         if (files == null || files.size() == 0) {
             return new ArrayList<>();
         }
-        return files.stream().map(Aria2TaskFile::getPath).collect(Collectors.toList());
+        return files.stream().map(Aria2TaskFile::getPath).distinct().collect(Collectors.toList());
     }
 
     @JsonIgnore
