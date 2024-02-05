@@ -8,6 +8,8 @@ import com.gin.aria2.response.clazz.Aria2ResponseMulti;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * <a href="https://aria2.github.io/manual/en/html/aria2c.html#input-file">下载参数</a>
  * @author bx002
@@ -155,7 +157,7 @@ public class Aria2Option implements Cloneable {
     @JsonSerialize(using = ToStringSerializer.class)
     Boolean hashCheckOnly;
     @JsonProperty("header")
-    String header;
+    List<String> header;
     @JsonProperty("http-accept-gzip")
     @JsonSerialize(using = ToStringSerializer.class)
     Boolean httpAcceptGzip;
